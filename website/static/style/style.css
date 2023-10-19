@@ -1,0 +1,31 @@
+body {
+    font-family: 'Phudu', cursive;
+    background-color: rgba(0, 0, 0, 0.041);
+}
+
+footer {
+    background-color: rgb(51, 40, 51);
+    text-align: center;
+}
+
+.footerheader {
+    font-family: 'Phudu', cursive;
+    color: rgb(255, 255, 255);
+}
+
+.navbar{
+    background-color: rgb(51, 40, 51);  
+}
+
+.detailsheader{
+    font-size: 32px;
+}
+
+.detailspara{
+    font-size: 18px;
+}
+
+.commentbg{
+    background-color: rgba(0, 0, 0, 0.000);
+}
+

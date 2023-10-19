@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel ="stylesheet" href ="../static/style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Phudu:wght@300&display=swap" rel="stylesheet">
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">NoteBooker</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="booking_history.html">Bookings</a>
+              <a class="nav-link active" aria-current="page" href="create_event.html">Create Event</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+  </head>
+  <body>
+    <br><br>
+    <h1 class = text-center>Create an Event</h1>
+    <br><br>
+    <div class = "container-fluid">
+        <div class = "row justify-content-center">
+            <div class="mb-3 col-sm-6">
+                <label class="form-label">Title *</label>
+                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. Big Music Event in Area" aria-label="default input example">
+            </div>
+        </div>
+        <div class = "row justify-content-center">
+            <div class="mb-3 col-sm-6">
+                <label class="form-label">Event/Artist *</label>
+                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. The Boppers" aria-label="default input example">
+            </div>
+        </div>
+        <div class = "row justify-content-center">
+            <div class="mb-3 col-sm-6">
+                <label class="form-label">Location *</label>
+                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. Brisbane" aria-label="default input example">
+            </div>
+        </div>
+        <div class = "row justify-content-center">
+            <div class="mb-3 col-sm-2">
+                <label class="form-label">Genre *</label>
+                <select class="form-select rounded border border-secondary" aria-label="Genre select">
+                    <option selected>Select</option>
+                    <option value="1">Pop</option>
+                    <option value="2">Rock</option>
+                    <option value="3">Jazz</option>
+                    <option value="3">Classical</option>
+                    <option value="3">Hip Hop</option>
+                    <option value="3">Country</option>
+                    <option value="3">R&B</option>
+                    <option value="3">Electronic</option>
+                    <option value="3">Metal</option>
+                    <option value="3">Indie</option>
+                    <option value="3">Other</option>
+                  </select>
+            </div>
+            <div class="mb-3 col-sm-2">
+                <label class="form-label">Tickets *</label>
+                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. 65" aria-label="default input example">
+            </div>
+            <div class="mb-3 col-sm-2">
+                <label class="form-label">Cost *</label>
+                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. $36" aria-label="default input example">
+            </div>
+        </div>
+        <div class = "row justify-content-center">
+            <div class="mb-3 col-sm-3">
+                <label class="form-label">Date *</label>
+                <input class="form-control rounded border border-secondary" type="text" placeholder="dd/mm/yyyy" aria-label="default input example">
+            </div>
+            <div class="mb-3 col-sm-3">
+                <label class="form-label">Time *</label>
+                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. 6:30 PM" aria-label="default input example">
+            </div>
+        </div>
+        <div class = "row justify-content-center">
+            <div class="mb-3 col-sm-6">
+                <label class="form-label">Description *</label>
+                <textarea class="form-control rounded border border-secondary" rows="4"></textarea>
+            </div>
+        </div>
+        <div class = "row justify-content-center">
+            <div class="mb-3 col-sm-4">
+                <label class="form-label">Upload Event Image</label>
+                <input type="file" class="form-control rounded border border-secondary"/>
+            </div>
+            <div class="mb-3 col-sm-2"></div>
+        </div>
+        <br>
+        <div class = "row justify-content-center">
+            <div class = "mb-3 col-sm-3">
+                <button type="submit" class="btn btn-secondary btn-lg">Create</button>
+            </div>
+            <div class = "mb-3 col-sm-3"></div>
+        </div>
+    </div>
+    <footer class = "py-5 mt-5">
+        <p class = "footerheader">Notebooker, 2023</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
