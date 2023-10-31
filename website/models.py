@@ -19,7 +19,8 @@ class Event(db.Model):
     description = db.Column(db.String(200))
     image = db.Column(db.String(400))
 
-    event_date = db.Column(db.DateTime, default=datetime.now())
+    event_date = db.Column(db.String(400))
+    #db.DateTime, default=datetime.now()
 
     max_tickets = db.Column(db.Integer)
     tickets_left = db.Column(db.Integer)

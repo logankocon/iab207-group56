@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
 {% from "bootstrap5/form.html" import render_field %}
 
 {% block content %}
@@ -6,86 +7,10 @@
     <h1 class = text-center>Create an Event</h1>
     <br><br>
     <div class = "container-fluid">
-        <form action="" method="post">
-            <div class="form-group">
-                {{ form.name(class_="form-control rounded border border-secondary") }}
-            </div>
-        </form>
-
         <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-6">
-                <label class="form-label">Title *</label>
-                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. Big Music Event in Area" aria-label="default input example">
+            <div class="mb-3 col-sm-6 form-group">
+                {{ render_form(form) }}
             </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-6">
-                <label class="form-label">Event/Artist *</label>
-                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. The Boppers" aria-label="default input example">
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-6">
-                <label class="form-label">Location *</label>
-                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. Brisbane" aria-label="default input example">
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-2">
-                <label class="form-label">Genre *</label>
-                <select class="form-select rounded border border-secondary" aria-label="Genre select">
-                    <option selected>Select</option>
-                    <option value="1">Pop</option>
-                    <option value="2">Rock</option>
-                    <option value="3">Jazz</option>
-                    <option value="3">Classical</option>
-                    <option value="3">Hip Hop</option>
-                    <option value="3">Country</option>
-                    <option value="3">R&B</option>
-                    <option value="3">Electronic</option>
-                    <option value="3">Metal</option>
-                    <option value="3">Indie</option>
-                    <option value="3">Other</option>
-                  </select>
-            </div>
-            <div class="mb-3 col-sm-2">
-                <label class="form-label">Tickets *</label>
-                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. 65" aria-label="default input example">
-            </div>
-            <div class="mb-3 col-sm-2">
-                <label class="form-label">Cost *</label>
-                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. $36" aria-label="default input example">
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-3">
-                <label class="form-label">Date *</label>
-                <input class="form-control rounded border border-secondary" type="text" placeholder="dd/mm/yyyy" aria-label="default input example">
-            </div>
-            <div class="mb-3 col-sm-3">
-                <label class="form-label">Time *</label>
-                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. 6:30 PM" aria-label="default input example">
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-6">
-                <label class="form-label">Description *</label>
-                <textarea class="form-control rounded border border-secondary" rows="4"></textarea>
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-4">
-                <label class="form-label">Upload Event Image</label>
-                <input type="file" class="form-control rounded border border-secondary"/>
-            </div>
-            <div class="mb-3 col-sm-2"></div>
-        </div>
-        <br>
-        <div class = "row justify-content-center">
-            <div class = "mb-3 col-sm-3">
-                <button type="submit" class="btn btn-secondary btn-lg">Create</button>
-            </div>
-            <div class = "mb-3 col-sm-3"></div>
         </div>
     </div>
 {% endblock %}

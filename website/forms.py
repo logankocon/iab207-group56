@@ -5,18 +5,18 @@ from flask_wtf.file import FileRequired, FileField, FileAllowed
 
 #creates the login information
 class LoginForm(FlaskForm):
-    user_name=StringField("User Name", validators=[InputRequired('Enter user name')])
-    password=PasswordField("Password", validators=[InputRequired('Enter user password')])
+    user_name=StringField("User Name", validators=[InputRequired('Enter user name')], render_kw={'class':'form-control rounded border border-secondary'})
+    password=PasswordField("Password", validators=[InputRequired('Enter user password')], render_kw={'class':'form-control rounded border border-secondary'})
     submit = SubmitField("Login")
 
  # this is the registration form
 class RegisterForm(FlaskForm):
-    user_name=StringField("User Name", validators=[InputRequired()])
-    email_id = StringField("Email Address", validators=[Email("Please enter a valid email")])
+    user_name=StringField("User Name", validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    email_id = StringField("Email Address", validators=[Email("Please enter a valid email")], render_kw={'class':'form-control rounded border border-secondary'})
     #linking two fields - password should be equal to data entered in confirm
     password=PasswordField("Password", validators=[InputRequired(),
-                  EqualTo('confirm', message="Passwords should match")])
-    confirm = PasswordField("Confirm Password")
+                  EqualTo('confirm', message="Passwords should match")], render_kw={'class':'form-control rounded border border-secondary'})
+    confirm = PasswordField("Confirm Password", render_kw={'class':'form-control rounded border border-secondary'})
 
     #submit button
     submit = SubmitField("Register")
@@ -26,16 +26,19 @@ ALLOWED_FILE = {"PNG", "JPG", "JPEG", "png", "jpg", "jpeg"}
 
 #create new event form
 class EventForm(FlaskForm):
-    name = StringField('Event Name', validators=[InputRequired()])
+    name = StringField('Event Name', validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
     
-    description = TextAreaField('Description',
+    description = TextAreaField('Description', render_kw={'class':'form-control rounded border border-secondary'},
             validators=[InputRequired()])
 
-    location = StringField('Event Location', validators = [InputRequired()])
+    location = StringField('Event Location', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
 
     image = FileField('Event Image', validators = [
         FileRequired(message='Image cannot be empty'),
-        FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
+        FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')], render_kw={'class':'form-control rounded border border-secondary'})
+    tickets = StringField('Available Tickets', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    date = StringField('Event Date', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    submit = SubmitField('Create', render_kw={'class':'form-control rounded border border-secondary'})
 
 
 #comment form

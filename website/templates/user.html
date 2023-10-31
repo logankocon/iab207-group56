@@ -8,66 +8,15 @@
 </div>
 
 <!-- Form rendering is simple and easy if using bootstrap -->
-{% if heading|lower == 'register' %}
-<form action = "" method = "post">
-    <div class = "container-fluid">
-        {{ form.hidden_tag() }}
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-6 form-group">
-                {{ form.user_name.label }}
-                {{ form.user_name(class ="form-control rounded border border-secondary") }}
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-6 form-group">
-                {{ form.email_id.label }}
-                {{ form.email_id(class ="form-control rounded border border-secondary") }}
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-6 form-group">
-                {{ form.password.label }}
-                {{ form.password(class ="form-control rounded border border-secondary") }}
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-6 form-group">
-                {{ form.confirm.label }}
-                {{ form.confirm(class ="form-control rounded border border-secondary") }}
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class = "mb-3 col-sm-3">
-                {{ form.submit(class ="form-control form-control rounded border border-secondary") }}
-            </div>
-        </div>
+<div class = "container-fluid">
+    <div class = "row justify-content-center">
+        <div class="mb-3 col-sm-6 form-group">
+            {{ render_form(form) }}
+        </div> 
     </div>
-</form>
-{% endif %}
+</div>
 <!-- When you have login form, then do show the user a link to register -->
 {% if heading|lower =='login' %}
-<form action = "" method = "post">
-    <div class = "container-fluid">
-        {{ form.hidden_tag() }}
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-6 form-group">
-                {{ form.user_name.label }}
-                {{ form.user_name(class ="form-control rounded border border-secondary") }}
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class="mb-3 col-sm-6 form-group">
-                {{ form.password.label }}
-                {{ form.password(class ="form-control rounded border border-secondary") }}
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class = "mb-3 col-sm-3">
-                {{ form.submit(class ="form-control form-control rounded border border-secondary") }}
-            </div>
-        </div>
-    </div>
-</form>
 <div class="col-md-4">
     <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
 </div>
