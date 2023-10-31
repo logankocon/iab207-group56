@@ -1,10 +1,11 @@
 {% include "base.html" %}
 {% from "bootstrap5/form.html" import render_form %}
-{% block body %}
 
 <div class="page-header">
     <h4>{{heading}}</h4>
 </div>
+
+{% block content %}
 
 <!-- Form rendering is simple and easy if using bootstrap -->
 <div class="col-md-6">
@@ -14,7 +15,7 @@
 <!-- When you have login form, then do show the user a link to register -->
 {% if heading|lower =='login' %}
 <div class="col-md-4">
-    <p>New user? <a href="{{ url_for('register') }}">Click here to register</a>.</p>
+    <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
 </div>
 {% endif %}
 
