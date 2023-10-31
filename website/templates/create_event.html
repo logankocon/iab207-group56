@@ -1,10 +1,17 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_field %}
 
 {% block content %}
     <br><br>
     <h1 class = text-center>Create an Event</h1>
     <br><br>
     <div class = "container-fluid">
+        <form action="" method="post">
+            <div class="form-group">
+                {{ form.name(class_="form-control rounded border border-secondary") }}
+            </div>
+        </form>
+
         <div class = "row justify-content-center">
             <div class="mb-3 col-sm-6">
                 <label class="form-label">Title *</label>
