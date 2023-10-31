@@ -48,3 +48,6 @@ class Comment(db.Model):
     #fk's
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+
+    def __repr__(self):
+        return f"Comment: {self.text}"

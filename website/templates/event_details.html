@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from "bootstrap5/form.html" import render_form %}
 
 {% block content %}
     <div class = "container">
@@ -64,55 +65,24 @@
                 <h1 class = "detailsheader">Comments</h1>
                 <div class = "row">
                     <div class = col-8>
-                        <textarea class="form-control rounded border border-secondary" rows="2" placeholder = "Leave a comment"></textarea>
+                      {{render_form(form,"/events/{0}/comment".format(event.id))}}
                     </div>
                 </div>
+                {% for comment in event.comments %}
                 <div class = "row">
                     <div class="card border-light col-10 commentbg">
                         <div class="card-body">
                           <div class="d-flex flex-row align-items-center">
-                                <img src="../static/img/profile_pic.jpg" width="30"
-                                  height="30" />
-                                <p class="small mb-0 ms-2">John Michales<br>Today 7:34 AM</p>
-                              </div>
+                                <p class="small mb-0 ms-2">{{comment.user_name}}<br>Today 7:34 AM</p>
+                          </div>
               
                           <div class="d-flex justify-content-between">
-                            <p>I had such at great time at this show!</p>
+                            <p>{{comment.text}}</p>
                           </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
-                <div class = "row">
-                    <div class="card border-light col-10 commentbg">
-                        <div class="card-body">
-                          <div class="d-flex flex-row align-items-center">
-                                <img src="../static/img/profile_pic.jpg" width="30"
-                                  height="30" />
-                                <p class="small mb-0 ms-2">Rebecca Thomas<br>August 21st</p>
-                              </div>
-              
-                          <div class="d-flex justify-content-between">
-                            <p>So excited to see this next month!</p>
-                          </div>
-                        </div>
-                      </div>
-                </div>
-                <div class = "row">
-                    <div class="card border-light col-10 commentbg">
-                        <div class="card-body">
-                          <div class="d-flex flex-row align-items-center">
-                                <img src="../static/img/profile_pic.jpg" width="30"
-                                  height="30" />
-                                <p class="small mb-0 ms-2">Billy Peyton<br>August 19th</p>
-                              </div>
-              
-                          <div class="d-flex justify-content-between">
-                            <p>Looks interesting, might have to check this event out</p>
-                          </div>
-                        </div>
-                      </div>
-                </div>
-            </div>
+                {% endfor %}
         </div>
     </div>
 {% endblock %}
