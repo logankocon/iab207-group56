@@ -18,13 +18,14 @@ class Event(db.Model):
     name = db.Column(db.String(80))
     description = db.Column(db.String(200))
     image = db.Column(db.String(400))
-
+    location = db.Column(db.String(400))
+    time = db.Column(db.String(400))
+    artist = db.Column(db.String(400))
+    genre = db.Column(db.String(400))
     event_date = db.Column(db.String(400))
     #db.DateTime, default=datetime.now()
-
     max_tickets = db.Column(db.Integer)
     tickets_left = db.Column(db.Integer)
-
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 

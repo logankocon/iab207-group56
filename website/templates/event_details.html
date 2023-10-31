@@ -6,24 +6,24 @@
             <div class = "col-md-8">
                 <br><br>
                 <div class = "row">
-                    <img src = "../static/img/band.jpeg" style = "width:400px; height:250x;">
+                    <img src = "{{event.image}}" style = "width:400px; height:250x;">
                 </div>
                 <br><br>
                 <h1 class = "detailsheader">Artist</h1>
-                <p class = "detailspara">Magic Music Man</p>
+                <p class = "detailspara">{{event.artist}}</p>
                 <h1 class = "detailsheader">Title</h1>
-                <p class = "detailspara">The Magic Music Maker</p>
+                <p class = "detailspara">{{event.name}}</p>
                 <h1 class = "detailsheader">Location</h1>
-                <p class = "detailspara">Brisbane, QLD</p>
-                <h1 class = "detailsheader">Date and Time</h1>
-                <p class = "detailspara">06/09/2023, 7:00 PM</p>
+                <p class = "detailspara">{{event.location}}</p>
+                <h1 class = "detailsheader">Date & Time</h1>
+                <p class = "detailspara">{{event.event_date}} {{event.time}}</p>
                 <h1 class = "detailsheader">Event Details</h1>
                 <div class = "row">
-                    <div class = "col-md-2" class = "detailspara">Genre: Jazz</div>
-                    <div class = "col-md-2" class = "detailspara">Tickets: 72</div>
+                    <div class = "col-md-2" class = "detailspara">Genre: {{event.genre}}</div>
+                    <div class = "col-md-2" class = "detailspara">Tickets: {{event.tickets_left}}</div>
                 </div>
                 <div class = "row">
-                    <div class = "col-10" class = "detailspara">Join the Magic Music Man in making magic jazz music in Brisbane this year. This show is something you don't want to miss. Located in the heart of Brisbane, there is great public transportation to the venue. Enjoy some of the finest jazz music Queensland has to offer! </div>
+                    <div class = "col-10" class = "detailspara">{{event.description}} </div>
                 </div>
             </div>
             <div class = "col-md-4">

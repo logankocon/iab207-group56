@@ -9,6 +9,13 @@ from flask_login import login_required, current_user
 
 event_bp = Blueprint('event', __name__, url_prefix='/events')
 
+@event_bp.route('/<id>')
+def show(id):
+    event = db.session.scalar(db.select(Event).where(Event.id==id))
+    # create the comment form
+    form = CommentForm()    
+    return render_template('event_details.html', event=event, form=form)
+
 @event_bp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
@@ -18,7 +25,8 @@ def create():
     #call the function that checks and returns image
     db_file_path = check_upload_file(form)
     event = Event(name=form.name.data,description=form.description.data, 
-    image=db_file_path,event_date=form.date.data, max_tickets=form.tickets.data, tickets_left=form.tickets.data)
+    image=db_file_path,event_date=form.date.data, max_tickets=form.tickets.data, tickets_left=form.tickets.data, location=form.location.data,
+    artist=form.artist.data, time=form.time.data, genre=form.genre.data)
     print("test2")
     print(form.name.data)
     # add the object to the db session

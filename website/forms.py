@@ -27,10 +27,9 @@ ALLOWED_FILE = {"PNG", "JPG", "JPEG", "png", "jpg", "jpeg"}
 #create new event form
 class EventForm(FlaskForm):
     name = StringField('Event Name', validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
-    
+    artist = StringField('Event Artist', validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
     description = TextAreaField('Description', render_kw={'class':'form-control rounded border border-secondary'},
             validators=[InputRequired()])
-
     location = StringField('Event Location', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
 
     image = FileField('Event Image', validators = [
@@ -38,6 +37,8 @@ class EventForm(FlaskForm):
         FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')], render_kw={'class':'form-control rounded border border-secondary'})
     tickets = StringField('Available Tickets', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
     date = StringField('Event Date', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    time = StringField('Event TIme', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    genre = StringField('Event Genre', validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
     submit = SubmitField('Create', render_kw={'class':'form-control rounded border border-secondary'})
 
 
