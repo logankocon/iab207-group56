@@ -28,6 +28,15 @@ class Event(db.Model):
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
+class Booking(db.Model):
+    __tablename__ = 'bookings'
+    id = db.Column(db.Integer, primary_key = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable = False)
+    purchase_date = db.Column(db.DateTime, default = datetime.now())
+
+    user = db.relationship('User', backref='bookings')
+    event = db.relationship('Event', backref='bookings')
 
 class Comment(db.Model):
     __tablename__ = 'comments'
