@@ -1,6 +1,7 @@
 from . import db
 from datetime import datetime
 from flask_login import UserMixin
+from sqlalchemy import Enum
 
 
 class User(db.Model, UserMixin):
@@ -27,6 +28,7 @@ class Event(db.Model):
     max_tickets = db.Column(db.Integer)
     tickets_left = db.Column(db.Integer)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    status = db.Column(Enum('Open', 'Sold Out', 'Cancelled', 'Unavaliable'), default='Open')
 
 
 class Booking(db.Model):

@@ -40,7 +40,22 @@
 			<a href = "{{ url_for('event.show', id=event.id) }}" class = "stretched-link"></a><img src="{{ event.image }}" class="card-img-top" style = "height: 160px;"></a>
                     <div class="card-body">
 			    <h5 class="card-title">{{ event.name }}</h5>
-			    <p class="card-text">Open<br>{{ event.location }}<br>{{ event.event_date }}<br>{{ event.time }}</p>
+
+			    {% if event.status == 'Open' %}
+			    <button type="button" class="btn btn-success">Open</button>
+
+			    {% elif event.status == 'Sold Out'%}
+			    <button type="button" class="btn btn-danger">Sold Out</button>
+
+			    {% elif event.status == 'Cancelled' %}
+			    <button type="button" class="btn btn-warning">Cancelled</button>
+
+			    {% else %}
+			    <button type="button" class="btn btn-secondary">Unavailable</button>
+			    
+			    {% endif %}
+
+			    <p class="card-text">{{ event.location }}<br>{{ event.event_date }}<br>{{ event.time }}</p>
                     </div>
                 </div>
             </div>	
