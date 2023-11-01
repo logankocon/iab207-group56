@@ -31,6 +31,24 @@
             </div>
         </div>
         <br>
+	
+	<div class = "row gy-4">
+	{% for event in events %}
+
+	    <div class = "col-lg-3 col-md-4 col-sm-6">
+                <div class="card rounded shadow border border-secondary border-2">
+			<a href = "event_details.html" class = "stretched-link"></a><img src="{{ event.image }}" class="card-img-top" style = "height: 160px;"></a>
+                    <div class="card-body">
+			    <h5 class="card-title">{{ event.name }}</h5>
+			    <p class="card-text">Open<br>{{ event.location }}<br>{{ event.event_date }}<br>{{ event.time }}</p>
+                    </div>
+                </div>
+            </div>	
+
+
+	{% endfor %}
+	</div>
+	<!--
         <div class = "row gy-4">
             <div class = "col-lg-3 col-md-4 col-sm-6">
                 <div class="card rounded shadow border border-secondary border-2">
@@ -103,7 +121,7 @@
                       <p class="card-text">Open<br>Fortitude Valley<br>13/10/23<br>9:00 PM</p>
                     </div>
                 </div>
-            </div>
+	    </div> --!>
         </div>
     </div>
 {% endblock %}
