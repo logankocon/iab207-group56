@@ -37,7 +37,7 @@
 
 	    <div class = "col-lg-3 col-md-4 col-sm-6">
                 <div class="card rounded shadow border border-secondary border-2">
-			<a href = "event_details.html" class = "stretched-link"></a><img src="{{ event.image }}" class="card-img-top" style = "height: 160px;"></a>
+			<a href = "{{ url_for('event.show', id=event.id) }}" class = "stretched-link"></a><img src="{{ event.image }}" class="card-img-top" style = "height: 160px;"></a>
                     <div class="card-body">
 			    <h5 class="card-title">{{ event.name }}</h5>
 			    <p class="card-text">Open<br>{{ event.location }}<br>{{ event.event_date }}<br>{{ event.time }}</p>
