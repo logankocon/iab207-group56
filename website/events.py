@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import Event, Comment, Booking
-from .forms import EventForm, CommentForm, BookingForm
+from .forms import EventForm, CommentForm, BookingForm, EditEventForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -26,9 +26,8 @@ def create():
     #call the function that checks and returns image
     db_file_path = check_upload_file(form)
     event = Event(name=form.name.data,description=form.description.data, 
-    image=db_file_path,event_date=form.date.data, max_tickets=form.tickets.data, tickets_left=form.tickets.data, location=form.location.data,
-    artist=form.artist.data, time=form.time.data, genre=form.genre.data)
-    print("test2")
+    image=db_file_path, event_date=form.date.data, max_tickets=form.tickets.data, tickets_left=form.tickets.data, location=form.location.data,
+    artist=form.artist.data, time=form.time.data, genre=form.genre.data, user = current_user)
     print(form.name.data)
     # add the object to the db session
     db.session.add(event)
@@ -37,8 +36,7 @@ def create():
     flash('Successfully created new travel destination', 'success')
     #Always end with redirect when form is valid
     return redirect(url_for('event.create'))
-  else: 
-    print("fail")
+  print(form.errors)
   return render_template('create_event.html', form=form)
 
 @event_bp.route('/<id>/comment', methods=['GET', 'POST'])  
@@ -72,12 +70,47 @@ def book(id):
          booking = Booking(tickets=form.tickets.data, event = event,
                         user = current_user)
          db.session.add(booking) 
+         event.tickets_left -= form.tickets.data
          db.session.commit()
+         if event.tickets_left == 0:
+            event.status = "Sold Out"
       else:
          flash('Not enough available tickets', 'fail')
      
       
    return redirect(url_for('event.show', id=id))
+
+@event_bp.route('/<id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+  print('Method type: ', request.method)
+  form = EditEventForm()
+  event = db.session.scalar(db.select(Event).where(Event.id==id))
+  form.description.data = event.description
+  if form.validate_on_submit():
+    #call the function that checks and returns image
+    print("HERE")
+    print(form.name.data)
+    event.name = form.name.data
+    event.description = form.description.data
+    event.location = form.location.data
+    event.artist = form.artist.data
+    event.genre = form.genre.data
+    event.event_date = form.date.data
+    event.time = form.time.data
+    event.tickets_left = form.tickets.data
+    print(event.name)
+    if str(form.image.data) == "None":
+       db.session.commit()
+       flash('Successfully updated event', 'success')
+    else:
+       db_file_path = check_upload_file(form)
+       event.image = db_file_path
+       db.session.commit()
+       print("fuck")
+    #Always end with redirect when form is valid
+    return redirect(url_for('event.edit', id = id))
+  return render_template('edit_event.html', form=form, event = event)
 
 @event_bp.route('/booking_history')
 def booking_history():

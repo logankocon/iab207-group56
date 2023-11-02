@@ -32,6 +32,9 @@
                 <div class = "row">
                     <div class = "col-10" class = "detailspara">{{event.description}} </div>
                 </div>
+                {% if event.user == current_user %}
+                <p> <a href="{{ url_for('event.edit', id=event.id) }}">Edit your page here</a>.</p>
+                {% endif %}
             </div>
             <div class = "col-md-4">
                 <br><br><br><br><br>

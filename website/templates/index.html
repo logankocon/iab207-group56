@@ -42,29 +42,25 @@
 	{% for event in events %}
 
 	    <div class = "col-lg-3 col-md-4 col-sm-6">
-                <div class="card rounded shadow border border-secondary border-2">
-			<a href = "{{ url_for('event.show', id=event.id) }}" class = "stretched-link"></a><img src="{{ event.image }}" class="card-img-top" style = "height: 160px;"></a>
-                    <div class="card-body">
-			    <h5 class="card-title">{{ event.name }}</h5>
+            <div class="card rounded shadow border border-secondary border-2">
+			    <a href = "{{ url_for('event.show', id=event.id) }}" class = "stretched-link"></a><img src="{{ event.image }}" class="card-img-top" style = "height: 160px;"></a>
+                <div class="card-body">
+			        <h5 class="card-title">{{ event.name }}</h5>
 
-			    {% if event.status == 'Open' %}
-			    <button type="button" class="btn btn-success">Open</button>
-
-			    {% elif event.status == 'Sold Out'%}
-			    <button type="button" class="btn btn-danger">Sold Out</button>
-
-			    {% elif event.status == 'Cancelled' %}
-			    <button type="button" class="btn btn-warning">Cancelled</button>
-
-			    {% else %}
-			    <button type="button" class="btn btn-secondary">Unavailable</button>
-			    
-			    {% endif %}
-
-			    <p class="card-text">{{ event.location }}<br>{{ event.event_date }}<br>{{ event.time }}</p>
-                    </div>
+                    {% if event.status == 'Open' %}
+                    <p class="card-text">Open
+                    {% elif event.status == 'Sold Out'%}
+                    <p class="card-text">Open
+                    {% elif event.status == 'Cancelled' %}
+                    <p class="card-text">Open
+                    {% else %}
+                    <p class="card-text">Open
+                    {% endif %}
+                    <br>
+			        {{ event.location }}<br>{{ event.event_date }}<br>{{ event.time }}</p>
                 </div>
-            </div>	
+            </div>
+        </div>	
 
 
 	{% endfor %}

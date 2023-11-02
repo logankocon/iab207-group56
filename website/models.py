@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(255), nullable=False)
     comments = db.relationship('Comment', backref='user')
     bookings = db.relationship('Booking', backref='user')
+    events = db.relationship('Event', backref='user')
 
 
 class Event(db.Model):
