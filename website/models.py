@@ -25,7 +25,7 @@ class Event(db.Model):
     time = db.Column(db.String(400))
     artist = db.Column(db.String(400))
     genre = db.Column(db.String(400))
-    event_date = db.Column(db.String(400))
+    event_date = db.Column(db.Date)
     #db.DateTime, default=datetime.now()
     max_tickets = db.Column(db.Integer)
     tickets_left = db.Column(db.Integer)

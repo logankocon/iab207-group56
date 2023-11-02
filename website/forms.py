@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, IntegerField, DateTimeField, SelectMultipleField, SelectField
+from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, IntegerField, DateTimeField, SelectMultipleField, SelectField, DateField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 from wtforms.fields import DateTimeLocalField
@@ -37,7 +37,7 @@ class EventForm(FlaskForm):
         FileRequired(message='Image cannot be empty'),
         FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')], render_kw={'class':'form-control rounded border border-secondary'})
     tickets = IntegerField('Available Tickets', validators = [InputRequired('Pleae enter available tickets.')], render_kw={'class':'form-control rounded border border-secondary'})
-    date = DateTimeLocalField('Event Date', format='%Y-%m-%d', validators=[InputRequired('Please enter an event date.')], render_kw={'class': 'form-control rounded border border-secondary datepicker'})
+    date = DateField('Event Date', format='%Y-%m-%d', validators=[InputRequired('Please enter an event date.')], render_kw={'class': 'form-control rounded border border-secondary datepicker'})
     time_choices = []
     for hour in range(24):
         for minute in ["00", "30"]:
@@ -59,7 +59,7 @@ class EditEventForm(FlaskForm):
     image = FileField('Event Image', validators = [
         FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')], render_kw={'class':'form-control rounded border border-secondary'})
     tickets = IntegerField('Available Tickets', validators = [InputRequired('Pleae enter available tickets.')], render_kw={'class':'form-control rounded border border-secondary'})
-    date = StringField('Event Date', validators = [InputRequired('Pleae enter an event date.')], render_kw={'class':'form-control rounded border border-secondary datepicker'})
+    date = DateField('Event Date', validators = [InputRequired('Pleae enter an event date.')], render_kw={'class':'form-control rounded border border-secondary datepicker'})
     time = StringField('Event Time', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
     genre = StringField('Event Genre', validators=[InputRequired('Pleae enter an event genre.')], render_kw={'class':'form-control rounded border border-secondary'})
     status = StringField('Event Status', render_kw={'class':'form-control rounded border border-secondary'})

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from datetime import datetime
 from .models import Event, Comment, Booking
 from .forms import EventForm, CommentForm, BookingForm, EditEventForm
 from . import db
@@ -13,6 +14,10 @@ edit_bp = Blueprint('edit', __name__, url_prefix='/edit')
 @event_bp.route('/<id>')
 def show(id):
     event = db.session.scalar(db.select(Event).where(Event.id==id))
+    if event.status == "Open" or "Sold Out":
+      if datetime.date(datetime.now()) > event.event_date:
+         event.status = "Inactive"
+    
     # create the comment form
     form = CommentForm() 
     bookform = BookingForm()   
@@ -106,6 +111,16 @@ def edit(id):
        db_file_path = check_upload_file(form)
        event.image = db_file_path
        db.session.commit()
+    if event.status == "Inactive":
+       if datetime.date(datetime.now()) < event.event_date:
+         if event.tickets_left <= 0:
+            event.status == "Sold Out"
+         else:
+            event.status == "Open"
+    if event.status == "Sold Out":
+       if event.tickets_left > 0:
+            event.status == "Open"
+   
     #Always end with redirect when form is valid
     return redirect(url_for('edit.edit', id = id))
   return render_template('edit_event.html', form=form, event=event)
