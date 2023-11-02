@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, IntegerField, DateTimeField, SelectMultipleField
+from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, IntegerField, DateTimeField, SelectMultipleField, SelectField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 from flask_wtf.file import FileRequired, FileField, FileAllowed
+from wtforms.fields import DateTimeLocalField
 
 #creates the login information
 class LoginForm(FlaskForm):
@@ -36,8 +37,14 @@ class EventForm(FlaskForm):
         FileRequired(message='Image cannot be empty'),
         FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')], render_kw={'class':'form-control rounded border border-secondary'})
     tickets = IntegerField('Available Tickets', validators = [InputRequired('Pleae enter available tickets.')], render_kw={'class':'form-control rounded border border-secondary'})
-    date = StringField('Event Date', validators = [InputRequired('Pleae enter an event date.')], render_kw={'class':'form-control rounded border border-secondary datepicker'})
-    time = StringField('Event Time', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    date = DateTimeLocalField('Event Date', format='%Y-%m-%d', validators=[InputRequired('Please enter an event date.')], render_kw={'class': 'form-control rounded border border-secondary datepicker'})
+    time_choices = []
+    for hour in range(24):
+        for minute in ["00", "30"]:
+            time_value = f"{str(hour).zfill(2)}:{minute}"
+            time_choices.append((time_value, time_value))
+    time = SelectField('Event Time', choices=time_choices, validators=[InputRequired('Please select an event time')], render_kw={'class': 'form-control rounded border border-secondary'})
+
     genre = StringField('Event Genre', validators=[InputRequired('Pleae enter an event genre.')], render_kw={'class':'form-control rounded border border-secondary'})
     #status = SelectMultipleField(u"Status", ['Sold Out','Open','Cancelled'])
     submit = SubmitField('Create', render_kw={'class':'form-control rounded border border-secondary'})

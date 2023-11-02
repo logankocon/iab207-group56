@@ -3,77 +3,75 @@
 {% from "bootstrap5/form.html" import render_field %}
 
 {% block navbar %}
-              <a class="nav-link" aria-current="page" href="/">Home</a>
-              <a class="nav-link" href="{{ url_for('event.booking_history') }}">Bookings</a>
-              <a class="nav-link active" href="{{ url_for('event.create') }}">Create Event</a>
+<a class="nav-link" aria-current="page" href="/">Home</a>
+<a class="nav-link" href="{{ url_for('event.booking_history') }}">Bookings</a>
+<a class="nav-link active" href="{{ url_for('event.create') }}">Create Event</a>
 {% endblock %}
 
 {% block content %}
-    <br><br>
-    <h1 class = text-center>Create an Event</h1>
-    <br><br>
-    <form action = "" method = "POST" name = "form" enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <div class = "container-fluid">
-            <div class = "row justify-content-center">
-                <div class="mb-3 col-sm-6">
-                    {{ form.name.label }}
-                    {{ form.name() }} {{ form.hidden_tag() }}
-                </div>
-            </div>
-            <div class = "row justify-content-center">
-                <div class="mb-3 col-sm-6">
-                    {{ form.artist.label }}
-                    {{ form.artist() }} {{ form.hidden_tag() }}
-                </div>
-            </div>
-            <div class = "row justify-content-center">
-                <div class="mb-3 col-sm-6">
-                    {{ form.location.label }}
-                    {{ form.location() }} {{ form.hidden_tag() }}
-                </div>
-            </div>
-            <div class = "row justify-content-center">
-                <div class="mb-3 col-sm-3">
-                    {{ form.genre.label }}
-                    {{ form.genre() }} {{ form.hidden_tag() }}
-                </div>
-                <div class="mb-3 col-sm-3">
-                    {{ form.tickets.label }}
-                    {{ form.tickets( )}} {{ form.hidden_tag() }}
-                </div>
-            </div>
-            <div class = "row justify-content-center">
-                <div class="mb-3 col-sm-3">
-                    {{ form.date.label }}
-                    {{ form.date() }} {{ form.hidden_tag() }}
-                </div>
-                <div class="mb-3 col-sm-3">
-                    {{ form.time.label }}
-                    {{ form.time() }} {{ form.hidden_tag() }}
-                </div>
-            </div>
-            <div class = "row justify-content-center">
-                <div class="mb-3 col-sm-6">
-                    {{ form.description.label }}
-                    {{ form.description() }} {{ form.hidden_tag() }}
-                </div>
-            </div>
-            <div class = "row justify-content-center">
-                <div class="mb-3 col-sm-6">
-                    {{ form.image.label }}
-                    {{ form.image() }} {{ form.hidden_tag() }}
-                </div>
-            </div>
-            <br>
-            <div class = "row justify-content-center">
-                <div class = "mb-3 col-sm-3">
-                    {{ form.submit() }} {{ form.hidden_tag() }}
-                </div>
-                <div class = "mb-3 col-sm-3"></div>
+<br><br>
+<h1 class="text-center">Create an Event</h1>
+<br><br>
+<form action="" method="POST" name="form" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="mb-3 col-sm-6">
+                {{ form.name.label }}
+                {{ form.name(placeholder="Enter event name") }} {{ form.hidden_tag() }}
             </div>
         </div>
-    </form>
-
+        <div class="row justify-content-center">
+            <div class="mb-3 col-sm-6">
+                {{ form.artist.label }}
+                {{ form.artist(placeholder="Enter event artist") }} {{ form.hidden_tag() }}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="mb-3 col-sm-6">
+                {{ form.location.label }}
+                {{ form.location(placeholder="Enter event location") }} {{ form.hidden_tag() }}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="mb-3 col-sm-3">
+                {{ form.genre.label }}
+                {{ form.genre(placeholder="Enter event genre") }} {{ form.hidden_tag() }}
+            </div>
+            <div class="mb-3 col-sm-3">
+                {{ form.tickets.label }}
+                {{ form.tickets(placeholder="Enter available tickets") }} {{ form.hidden_tag() }}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="mb-3 col-sm-3 form-group">
+                {{ form.date.label }}
+                {{ form.date(placeholder="Enter event date") }} {{ form.hidden_tag() }}
+            </div>
+            <div class="mb-3 col-sm-3 form-group">
+                {{ form.time.label }}
+                {{ form.time(placeholder="Enter event time") }} {{ form.hidden_tag() }}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="mb-3 col-sm-6">
+                {{ form.description.label }}
+                {{ form.description(placeholder="Enter event description") }} {{ form.hidden_tag() }}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="mb-3 col-sm-6">
+                {{ form.image.label }}
+                {{ form.image() }} {{ form.hidden_tag() }}
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="mb-3 col-sm-3">
+                {{ form.submit() }} {{ form.hidden_tag() }}
+            </div>
+            <div class="mb-3 col-sm-3"></div>
+        </div>
+    </div>
+</form>
 {% endblock %}
-   
