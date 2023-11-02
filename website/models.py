@@ -44,8 +44,6 @@ class Booking(db.Model):
     purchase_date = db.Column(db.DateTime, default = datetime.now())
     tickets = db.Column(db.Integer)
 
-    def __repr__(self):
-        return f"Booking: {self.text}"
     
 class Comment(db.Model):
     __tablename__ = 'comments'

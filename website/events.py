@@ -52,7 +52,7 @@ def comment(id):
       #here the back-referencing works - comment.destination is set
       # and the link is created
       db.session.add(comment) 
-      db.session.commit() 
+      db.session.commit()
       #flashing a message which needs to be handled by the html
       flash('Your comment has been added', 'success')  
       # print('Your comment has been added', 'success') 
@@ -80,7 +80,7 @@ def book(id):
       
    return redirect(url_for('event.show', id=id))
 
-@event_bp.route('/<id>/edit', methods=['GET', 'POST'])
+@event_bp.route('/edit/<id>', methods=['GET', 'POST'])
 @login_required
 def edit(id):
   print('Method type: ', request.method)
@@ -113,8 +113,11 @@ def edit(id):
   return render_template('edit_event.html', form=form, event = event)
 
 @event_bp.route('/booking_history')
+@login_required
 def booking_history():
-    bookings = db.session.scalars(db.select(Booking)).all()
+    bookings = db.session.scalars(db.select(Booking).where(Booking.user_id == current_user.id)).all()
+    print("HERE")
+    print(str(bookings))
     return render_template('booking_history.html', bookings = bookings)
 
 

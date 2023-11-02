@@ -22,16 +22,18 @@
                 <p class = "detailspara">{{event.name}}</p>
                 <h1 class = "detailsheader">Location</h1>
                 <p class = "detailspara">{{event.location}}</p>
+                <h1 class = "detailsheader">Status</h1>
+                {% if event.status == "Open" %}
+                <p class = "detailspara">{{event.tickets_left}} available tickets</p>
+                {% else %}
+                <p class = "detailspara">{{event.status}}</p>
+                {% endif %}
+                <h1 class = "detailsheader">Genre</h1>
+                <p class = "detailspara">{{event.genre}}</p>
                 <h1 class = "detailsheader">Date & Time</h1>
                 <p class = "detailspara">{{event.event_date}} {{event.time}}</p>
-                <h1 class = "detailsheader">Event Details</h1>
-                <div class = "row">
-                    <div class = "col-md-2" class = "detailspara">Genre: {{event.genre}}</div>
-                    <div class = "col-md-2" class = "detailspara">Tickets: {{event.tickets_left}}</div>
-                </div>
-                <div class = "row">
-                    <div class = "col-10" class = "detailspara">{{event.description}} </div>
-                </div>
+                <h1 class = "detailsheader">Description</h1>
+                <p class = "detailspara">{{event.description}}</p>
                 {% if event.user == current_user %}
                 <p> <a href="{{ url_for('event.edit', id=event.id) }}">Edit your page here</a>.</p>
                 {% endif %}

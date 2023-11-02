@@ -8,3 +8,4 @@ main_bp = Blueprint('main', __name__)
 def index():
     events = db.session.scalars(db.select(Event)).all()
     return render_template('index.html', events = events)
+
