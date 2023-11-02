@@ -36,10 +36,15 @@ class Booking(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable = False)
+    image = db.Column(db.String(400))
     purchase_date = db.Column(db.DateTime, default = datetime.now())
+    tickets = db.Column(db.Integer)
 
-    user = db.relationship('User', backref='bookings')
-    event = db.relationship('Event', backref='bookings')
+    def __repr__(self):
+        return f"Booking: {self.text}"
+
+    #user = db.relationship('User', backref='bookings')
+    #event = db.relationship('Event', backref='bookings')
 
 class Comment(db.Model):
     __tablename__ = 'comments'

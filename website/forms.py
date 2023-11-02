@@ -41,6 +41,9 @@ class EventForm(FlaskForm):
     genre = StringField('Event Genre', validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
     submit = SubmitField('Create', render_kw={'class':'form-control rounded border border-secondary'})
 
+class BookingForm(FlaskForm):
+    tickets = tickets = StringField('Tickets to Purchase', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    submit = SubmitField('Book', render_kw={'class':'form-control rounded border border-secondary'})
 
 #comment form
 class CommentForm(FlaskForm):

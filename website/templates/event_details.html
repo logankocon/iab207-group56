@@ -42,8 +42,7 @@
                           <div class="modal-body">
                             <div class = "row justify-content-center">
                               <div class = "col-4">
-                                <label class="form-label">Tickets</label>
-                                <input class="form-control rounded border border-secondary" type="text" placeholder="e.g. 3" aria-label="default input example">
+                                {{render_form(bookform,"/events/{0}/book".format(event.id))}}
                               </div>
                             </div><br>
                             <div class = "row justify-content-center">

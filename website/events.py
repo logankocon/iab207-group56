@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import Event, Comment
-from .forms import EventForm, CommentForm
+from .models import Event, Comment, Booking
+from .forms import EventForm, CommentForm, BookingForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -13,8 +13,9 @@ event_bp = Blueprint('event', __name__, url_prefix='/events')
 def show(id):
     event = db.session.scalar(db.select(Event).where(Event.id==id))
     # create the comment form
-    form = CommentForm()    
-    return render_template('event_details.html', event=event, form=form)
+    form = CommentForm() 
+    bookform = BookingForm()   
+    return render_template('event_details.html', event=event, form=form, bookform=bookform)
 
 @event_bp.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -59,6 +60,21 @@ def comment(id):
       # print('Your comment has been added', 'success') 
     # using redirect sends a GET request to destination.show
     return redirect(url_for('event.show', id=id))
+
+@event_bp.route('/<id>/book', methods=['GET', 'POST'])  
+@login_required
+def book(id):
+   form = BookingForm()
+   event = db.session.scalar(db.select(Event.id).where(Event.id==id))
+   img =  db.session.scalar(db.select(Event.image).where(Event.id==id))
+   print(current_user)
+   if form.validate_on_submit(): 
+      booking = Booking(tickets=form.tickets.data, event_id=event, image=img,
+                        user_id=current_user.id)
+      db.session.add(booking) 
+      db.session.commit() 
+   return redirect(url_for('event.show', id=id))
+
 
 
 def check_upload_file(form):
