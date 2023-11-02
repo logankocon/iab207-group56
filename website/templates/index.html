@@ -9,33 +9,41 @@
 {% block content %}
     <div class = "container-fluid">
         <br>
-        <div class = "row justify-content-center">
-            <div class = "col-8">
-                <div class="input-group rounded">
-                    <input type="search" class="form-control rounded border border-secondary" placeholder="Search for events" aria-label="Search" aria-describedby="search-addon" />
-                </div>
-            </div>
-        </div>
-        <br><br>
-        <h1 class = "text-center">Events near Brisbane, QLD</h1>
-        <div class = "row">
-            <div style = "max-width: 200px;">
-                <select class="form-select form-select-sm rounded border border-secondary" aria-label="Small select example">
-                    <option selected>Filter by Genre</option>
-                    <option value="1">Pop</option>
-                    <option value="2">Rock</option>
-                    <option value="3">Jazz</option>
-                    <option value="3">Classical</option>
-                    <option value="3">Hip Hop</option>
-                    <option value="3">Country</option>
-                    <option value="3">R&B</option>
-                    <option value="3">Electronic</option>
-                    <option value="3">Metal</option>
-                    <option value="3">Indie</option>
-                    <option value="3">Other</option>
-                  </select>
-            </div>
-        </div>
+	    <form action="{{ url_for('main.search')}}" method="get" class="form-inline">
+		<div class = "row justify-content-center">
+		    <div class = "col-8">
+			<div class="input-group rounded">
+			    <input name="search" type="search" id="searchForm" class="form-control rounded border border-secondary" placeholder="Search for events" aria-label="Search" aria-describedby="search-addon" />
+			</div>
+		    </div>
+		</div>
+		<br><br>
+		<h1 class = "text-center">Events near Brisbane, QLD</h1>
+		<div class = "row">
+		    <div style = "max-width: 200px;">
+			<select name="filter" class="form-select form-select-sm rounded border border-secondary" aria-label="Small select example">
+			    <option selected>Filter by Genre</option>
+			    <option value="Pop">Pop</option>
+			    <option value="Rock">Rock</option>
+			    <option value="Jazz">Jazz</option>
+			    <option value="Classical">Classical</option>
+			    <option value="Hip Hop">Hip Hop</option>
+			    <option value="Country">Country</option>
+			    <option value="R&B">R&B</option>
+			    <option value="Electronic">Electronic</option>
+			    <option value="Metal">Metal</option>
+			    <option value="Indie">Indie</option>
+			    <option value="Other">Other</option>
+			  </select>
+		    </div>
+		</div>
+
+		<div class="row justify-content-center">
+		    <div class="col-2">
+			    <button type="submit" class="btn btn-secondary">Search<button>
+		    </div>
+		</div>
+	    </form>
         <br>
 
 	{% if events == [] %}
