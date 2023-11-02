@@ -11,6 +11,7 @@ class User(db.Model, UserMixin):
     emailid = db.Column(db.String(100), index=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     comments = db.relationship('Comment', backref='user')
+    bookings = db.relationship('Booking', backref='user')
 
 
 class Event(db.Model):
@@ -29,6 +30,8 @@ class Event(db.Model):
     tickets_left = db.Column(db.Integer)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     status = db.Column(Enum('Open', 'Sold Out', 'Cancelled', 'Unavaliable'), default='Open')
+    comments = db.relationship('Comment', backref='event')
+    bookings = db.relationship('Booking', backref='event')
 
 
 class Booking(db.Model):
@@ -42,10 +45,7 @@ class Booking(db.Model):
 
     def __repr__(self):
         return f"Booking: {self.text}"
-
-    #user = db.relationship('User', backref='bookings')
-    #event = db.relationship('Event', backref='bookings')
-
+    
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key = True)

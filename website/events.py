@@ -46,10 +46,10 @@ def create():
 def comment(id):  
     form = CommentForm()  
     #get the destination object associated to the page and the comment
-    event = db.session.scalar(db.select(Event.id).where(Event.id==id))
+    event = db.session.scalar(db.select(Event).where(Event.id==id))
     if form.validate_on_submit():  
       #read the comment from the form
-      comment = Comment(text=form.text.data, event_id=event,
+      comment = Comment(text=form.text.data, event=event,
                         user=current_user) 
       #here the back-referencing works - comment.destination is set
       # and the link is created
@@ -65,15 +65,25 @@ def comment(id):
 @login_required
 def book(id):
    form = BookingForm()
-   event = db.session.scalar(db.select(Event.id).where(Event.id==id))
-   img =  db.session.scalar(db.select(Event.image).where(Event.id==id))
+   event = db.session.scalar(db.select(Event).where(Event.id==id))
    print(current_user)
    if form.validate_on_submit(): 
-      booking = Booking(tickets=form.tickets.data, event_id=event, image=img,
-                        user_id=current_user.id)
-      db.session.add(booking) 
-      db.session.commit() 
+      if event.tickets_left >= int(form.tickets.data):
+         booking = Booking(tickets=form.tickets.data, event = event,
+                        user = current_user)
+         db.session.add(booking) 
+         db.session.commit()
+      else:
+         flash('Not enough available tickets', 'fail')
+     
+      
    return redirect(url_for('event.show', id=id))
+
+@event_bp.route('/booking_history')
+def booking_history():
+    bookings = db.session.scalars(db.select(Booking)).all()
+    return render_template('booking_history.html', bookings = bookings)
+
 
 
 

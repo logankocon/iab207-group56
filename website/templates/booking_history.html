@@ -11,73 +11,24 @@
                     <input type="search" class="form-control rounded border border-secondary" placeholder="Search for events" aria-label="Search" aria-describedby="search-addon" />
             </div>
         </div>
+        {% for booking in bookings %}
         <div class = "row justify-content-center p-3">
             <div class = "col-10">
                 <div class="card mb-3 rounded shadow border border-secondary border-2">
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img src="../static/img/band3.jpg" class="img-fluid rounded-start" style = "width:500px; height:180px;">
+                        <img src="{{booking.event.image}}" class="img-fluid rounded-start" style = "width:500px; height:180px;">
                       </div>
                       <div class="col-md-8">
                         <div class="card-body">
-                          <h5 class="card-title">Mr Music Live</h5>
-                          <p class="card-text">Booking ID: b64475<br>Booking Date: 06/09/23<br>Event Date: 23/09/23<br>Don't forget to bring your ticket on the date of the event.</p>
+                          <h5 class="card-title">{{booking.event.name}}</h5>
+                          <p class="card-text">Booking Date: {{booking.purchase_date}}<br>Event Date: {{booking.event.event_date}}<br>Don't forget to bring your ticket on the date of the event.</p>
                         </div>
                       </div>
                     </div>
                   </div>
             </div>
         </div>
-        <div class = "row justify-content-center">
-            <div class = "col-10">
-                <div class="card mb-3 rounded shadow border border-secondary border-2">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="../static/img/band6.jpg" class="img-fluid rounded-start" style = "width:500px; height:180px;">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">Big Birthday Bash</h5>
-                          <p class="card-text">Booking ID: b64474<br>Booking Date: 05/09/23<br>Event Date: 25/10/23<br>Don't forget to bring your ticket on the date of the event.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            </div>
-        </div>
-        <div class = "row justify-content-center p-3">
-            <div class = "col-10">
-                <div class="card mb-3 rounded shadow border border-secondary border-2">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="../static/img/band5.jpg" class="img-fluid rounded-start" style = "width:500px; height:180px;">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">The Band Playing</h5>
-                          <p class="card-text">Booking ID: b64473<br>Booking Date: 03/09/23<br>Event Date: 15/10/23<br>Don't forget to bring your ticket on the date of the event.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            </div>
-        </div>
-        <div class = "row justify-content-center">
-            <div class = "col-10">
-                <div class="card mb-3 rounded shadow border border-secondary border-2">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="../static/img/band8.jpg" class="img-fluid rounded-start" style = "width:500px; height:180px;">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">The Magic Music Maker 2</h5>
-                          <p class="card-text">Booking ID: b64472<br>Booking Date: 02/09/23<br>Event Date: 13/10/23<br>Don't forget to bring your ticket on the date of the event.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}
