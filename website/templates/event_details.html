@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% from "bootstrap5/form.html" import render_form %}
 
+{% block navbar %}
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+              <a class="nav-link" href="{{ url_for('event.booking_history') }}">Bookings</a>
+              <a class="nav-link" href="{{ url_for('event.create') }}">Create Event</a>
+{% endblock %}
+
 {% block content %}
     <div class = "container">
         <div class = "row gy-4">

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField
+from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, IntegerField, DateTimeField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 
@@ -26,23 +26,23 @@ ALLOWED_FILE = {"PNG", "JPG", "JPEG", "png", "jpg", "jpeg"}
 
 #create new event form
 class EventForm(FlaskForm):
-    name = StringField('Event Name', validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
-    artist = StringField('Event Artist', validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    name = StringField('Event Name', validators=[InputRequired('Pleae enter an event title.')], render_kw={'class':'form-control rounded border border-secondary'})
+    artist = StringField('Event Artist', validators=[InputRequired('Pleae enter an event artist.')], render_kw={'class':'form-control rounded border border-secondary'})
     description = TextAreaField('Description', render_kw={'class':'form-control rounded border border-secondary'},
-            validators=[InputRequired()])
-    location = StringField('Event Location', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+            validators=[InputRequired('Pleae enter a description.')])
+    location = StringField('Event Location', validators = [InputRequired('Pleae enter a location.')], render_kw={'class':'form-control rounded border border-secondary'})
 
     image = FileField('Event Image', validators = [
         FileRequired(message='Image cannot be empty'),
         FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')], render_kw={'class':'form-control rounded border border-secondary'})
-    tickets = StringField('Available Tickets', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
-    date = StringField('Event Date', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
-    time = StringField('Event TIme', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
-    genre = StringField('Event Genre', validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    tickets = IntegerField('Available Tickets', validators = [InputRequired('Pleae enter available tickets.')], render_kw={'class':'form-control rounded border border-secondary'})
+    date = DateTimeField('Event Date', validators = [InputRequired('Pleae enter an event date.')], render_kw={'class':'form-control rounded border border-secondary datepicker'})
+    time = StringField('Event Time', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    genre = StringField('Event Genre', validators=[InputRequired('Pleae enter an event genre.')], render_kw={'class':'form-control rounded border border-secondary'})
     submit = SubmitField('Create', render_kw={'class':'form-control rounded border border-secondary'})
 
 class BookingForm(FlaskForm):
-    tickets = tickets = StringField('Tickets to Purchase', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
+    tickets = tickets = IntegerField('Tickets to Purchase', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
     submit = SubmitField('Book', render_kw={'class':'form-control rounded border border-secondary'})
 
 #comment form
