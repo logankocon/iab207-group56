@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
 
 event_bp = Blueprint('event', __name__, url_prefix='/events')
+edit_bp = Blueprint('edit', __name__, url_prefix='/edit')
 
 @event_bp.route('/<id>')
 def show(id):
@@ -71,16 +72,16 @@ def book(id):
                         user = current_user)
          db.session.add(booking) 
          event.tickets_left -= form.tickets.data
-         db.session.commit()
-         if event.tickets_left == 0:
+         if event.tickets_left <= 0:
             event.status = "Sold Out"
+         db.session.commit()
       else:
          flash('Not enough available tickets', 'fail')
      
       
    return redirect(url_for('event.show', id=id))
 
-@event_bp.route('/edit/<id>', methods=['GET', 'POST'])
+@edit_bp.route('/<id>', methods=['GET', 'POST'])
 @login_required
 def edit(id):
   print('Method type: ', request.method)
@@ -89,8 +90,6 @@ def edit(id):
   form.description.data = event.description
   if form.validate_on_submit():
     #call the function that checks and returns image
-    print("HERE")
-    print(form.name.data)
     event.name = form.name.data
     event.description = form.description.data
     event.location = form.location.data
@@ -107,10 +106,9 @@ def edit(id):
        db_file_path = check_upload_file(form)
        event.image = db_file_path
        db.session.commit()
-       print("fuck")
     #Always end with redirect when form is valid
-    return redirect(url_for('event.edit', id = id))
-  return render_template('edit_event.html', form=form, event = event)
+    return redirect(url_for('edit.edit', id = id))
+  return render_template('edit_event.html', form=form, event=event)
 
 @event_bp.route('/booking_history')
 @login_required
