@@ -39,7 +39,7 @@ def create():
     db.session.add(event)
     # commit to the database
     db.session.commit()
-    flash('Successfully created new travel destination', 'success')
+    flash('Successfully created new event', 'success')
     #Always end with redirect when form is valid
     return redirect(url_for('event.show', id = event.id))
   print(form.errors)
@@ -72,16 +72,21 @@ def book(id):
    event = db.session.scalar(db.select(Event).where(Event.id==id))
    print(current_user)
    if form.validate_on_submit(): 
-      if event.tickets_left >= int(form.tickets.data):
-         booking = Booking(tickets=form.tickets.data, event = event,
-                        user = current_user)
-         db.session.add(booking) 
-         event.tickets_left -= form.tickets.data
-         if event.tickets_left <= 0:
-            event.status = "Sold Out"
-         db.session.commit()
+      if event.status == "Open":
+         if event.tickets_left >= int(form.tickets.data):
+            booking = Booking(tickets=form.tickets.data, event = event,
+                           user = current_user)
+            db.session.add(booking) 
+            event.tickets_left -= form.tickets.data
+            if event.tickets_left <= 0:
+               event.status = "Sold Out"
+            db.session.commit()
+            flash(f"New Booking with id {booking.id} created!")
+         else:
+            flash('Not enough available tickets', 'fail')
       else:
-         flash('Not enough available tickets', 'fail')
+         flash('Event is not currently accepting bookings.')
+
      
       
    return redirect(url_for('event.show', id=id))

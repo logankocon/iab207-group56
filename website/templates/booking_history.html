@@ -14,12 +14,6 @@
     <p class = text-center>You have no bookings.</p>
     {% else %}
     <div class = "container-fluid">
-        <div class = "row justify-content-center p-3">
-            <div class = "col-6 col-lg-3 col-sm-4">
-                <div class="input-group rounded">
-                    <input type="search" class="form-control rounded border border-secondary" placeholder="Search for events" aria-label="Search" aria-describedby="search-addon" />
-            </div>
-        </div>
         {% for booking in bookings %}
         <div class = "row justify-content-center p-3">
             <div class = "col-10">
@@ -31,7 +25,7 @@
                       <div class="col-md-8">
                         <div class="card-body">
                           <h5 class="card-title">{{booking.event.name}}</h5>
-                          <p class="card-text">Booking Date: {{booking.purchase_date}}<br>Event Date: {{booking.event.event_date}}<br>Don't forget to bring your ticket on the date of the event.</p>
+                          <p class="card-text">Booking ID: {{booking.id}}<br>Booking Date: {{booking.purchase_date.strftime('%d/%m/%y')}}<br>Event Date: {{booking.event.event_date.strftime('%d/%m/%y')}}<br>Don't forget to bring your ticket on the date of the event.</p>
                         </div>
                       </div>
                     </div>

@@ -29,7 +29,7 @@ def search():
             events = db.session.scalars(db.select(Event)).all()
         elif filter_option == "Other":
             query = ["Jazz", "Rock", "Pop", "Classical", "Hip Hop", "Country", "R&B", "Electronic", "Metal", "Indie"]
-            events = Event.query.filter(Event.genre(query))
+            events = Event.query.filter(Event.genre.not_in(query))
         else:
             query = '%' + filter_option + '%'
             events = Event.query.filter(Event.genre.like(query)).all()
