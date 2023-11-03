@@ -5,73 +5,67 @@ from .forms import EventForm, CommentForm, BookingForm, EditEventForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
-#additional import:
 from flask_login import login_required, current_user
 
+#event blueprints
 event_bp = Blueprint('event', __name__, url_prefix='/events')
+#needed to make a new edits blueprint because for some reason having multiple sections in the url was breaking the styling
 edit_bp = Blueprint('edit', __name__, url_prefix='/edit')
 
+#displays event
 @event_bp.route('/<id>')
 def show(id):
     event = db.session.scalar(db.select(Event).where(Event.id==id))
+    #checks if the event date has passed 
     if event.status == "Open" or "Sold Out":
       if datetime.date(datetime.now()) > event.event_date:
          event.status = "Inactive"
-    
-    # create the comment form
     form = CommentForm() 
     bookform = BookingForm()   
     return render_template('event_details.html', event=event, form=form, bookform=bookform)
 
 @event_bp.route('/create', methods=['GET', 'POST'])
 @login_required
+#creates event
 def create():
   print('Method type: ', request.method)
   form = EventForm()
   if form.validate_on_submit():
-    #call the function that checks and returns image
     db_file_path = check_upload_file(form)
     event = Event(name=form.name.data,description=form.description.data, 
     image=db_file_path, event_date=form.date.data, max_tickets=form.tickets.data, tickets_left=form.tickets.data, location=form.location.data,
     artist=form.artist.data, time=form.time.data, genre=form.genre.data, user = current_user)
     print(form.name.data)
-    # add the object to the db session
     db.session.add(event)
-    # commit to the database
     db.session.commit()
     flash('Successfully created new event', 'success')
-    #Always end with redirect when form is valid
     return redirect(url_for('event.show', id = event.id))
   print(form.errors)
   return render_template('create_event.html', form=form)
 
 @event_bp.route('/<id>/comment', methods=['GET', 'POST'])  
 @login_required
+#adds a comment to event page
 def comment(id):  
     form = CommentForm()  
-    #get the destination object associated to the page and the comment
     event = db.session.scalar(db.select(Event).where(Event.id==id))
     if form.validate_on_submit():  
-      #read the comment from the form
       comment = Comment(text=form.text.data, event=event,
                         user=current_user) 
-      #here the back-referencing works - comment.destination is set
-      # and the link is created
       db.session.add(comment) 
       db.session.commit()
-      #flashing a message which needs to be handled by the html
       flash('Your comment has been added', 'success')  
-      # print('Your comment has been added', 'success') 
-    # using redirect sends a GET request to destination.show
     return redirect(url_for('event.show', id=id))
 
 @event_bp.route('/<id>/book', methods=['GET', 'POST'])  
 @login_required
+#creates booking
 def book(id):
    form = BookingForm()
    event = db.session.scalar(db.select(Event).where(Event.id==id))
    print(current_user)
    if form.validate_on_submit(): 
+      #event can only be booked if status is open
       if event.status == "Open":
          if event.tickets_left >= int(form.tickets.data):
             booking = Booking(tickets=form.tickets.data, event = event,
@@ -93,15 +87,16 @@ def book(id):
 
 @edit_bp.route('/<id>', methods=['GET', 'POST'])
 @login_required
+#edits already existing booking
 def edit(id):
   print('Method type: ', request.method)
   form = EditEventForm()
   event = db.session.scalar(db.select(Event).where(Event.id==id))
+  #sets appropriate data in the forms
   form.description.data = event.description
   if event.status == "Cancelled":
      form.cancel.data = True
   if form.validate_on_submit():
-    #call the function that checks and returns image
     event.name = form.name.data
     event.description = form.description.data
     event.location = form.location.data
@@ -111,6 +106,7 @@ def edit(id):
     event.time = form.time.data
     event.tickets_left = form.tickets.data
     print(event.name)
+    #a bunch of if statements to automatically set the event's status based on edits
     if str(form.image.data) == "None":
        db.session.commit()
     else:
@@ -143,12 +139,12 @@ def edit(id):
     db.session.commit()
     flash('Successfully updated event', 'success')
    
-    #Always end with redirect when form is valid
     return redirect(url_for('edit.edit', id = id))
   return render_template('edit_event.html', form=form, event=event)
 
 @event_bp.route('/booking_history')
 @login_required
+#renders user's booking history
 def booking_history():
     bookings = db.session.scalars(db.select(Booking).where(Booking.user_id == current_user.id)).all()
     print(str(bookings))

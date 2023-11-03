@@ -47,10 +47,12 @@
     </form>
     <br>
 
+    <!-- displays message if no events -->
     {% if events == [] %}
         <p class="text-center">There are no events yet.</p>
     {% else %}
         <div class="row gy-4">
+            <!-- renders each event currently stored in the db -->
             {% for event in events %}
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="card rounded shadow border border-secondary border-2">
@@ -67,80 +69,3 @@
 	{% endfor %}
 	</div>
     {% endif %}
-	<!--
-        <div class = "row gy-4">
-            <div class = "col-lg-3 col-md-4 col-sm-6">
-                <div class="card rounded shadow border border-secondary border-2">
-                    <a href = "event_details.html" class = "stretched-link"></a><img src="../static/img/band.jpeg" class="card-img-top" style = "height: 160px;"></a>
-                    <div class="card-body">
-                      <h5 class="card-title">The Magic Music Maker</h5>
-                      <p class="card-text">Open<br>Brisbane<br>06/09/23<br>7:00 PM</p>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-lg-3 col-md-4 col-sm-6">
-                <div class="card rounded shadow border border-secondary border-2">
-                    <a href = "event_details.html" class = "stretched-link"></a><img src="../static/img/band2.jpg" class="card-img-top" style = "height: 160px;"></a>
-                    <div class="card-body">
-                      <h5 class="card-title">Live on Stage</h5>
-                      <p class="card-text">Open<br>Kelvin Grove<br>17/09/23<br>7:30 PM</p>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-lg-3 col-md-4 col-sm-6">
-                <div class="card rounded shadow border border-secondary border-2">
-                    <a href = "event_details.html" class = "stretched-link"></a><img src="../static/img/band3.jpg" class="card-img-top" style = "height: 160px;"></a>
-                    <div class="card-body">
-                      <h5 class="card-title">Mr Music Live</h5>
-                      <p class="card-text">Sold Out<br>Sun Corp Stadium<br>23/09/23<br>7:00 PM</p>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-lg-3 col-md-4 col-sm-6">
-                <div class="card rounded shadow border border-secondary border-2">
-                    <a href = "event_details.html" class = "stretched-link"></a><img src="../static/img/band4.jpg" class="card-img-top" style = "height: 160px;"></a>
-                    <div class="card-body">
-                      <h5 class="card-title">Live Music</h5>
-                      <p class="card-text">Open<br>Brisbane<br>31/08/23<br>7:00 PM</p>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-lg-3 col-md-4 col-sm-6">
-                <div class="card rounded shadow border border-secondary border-2">
-                    <a href = "event_details.html" class = "stretched-link"></a><img src="../static/img/band5.jpg" class="card-img-top" style = "height: 160px;"></a>
-                    <div class="card-body">
-                      <h5 class="card-title">The Band Playing</h5>
-                      <p class="card-text">Open<br>Brisbane<br>15/10/23<br>8:00 PM</p>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-lg-3 col-md-4 col-sm-6">
-                <div class="card rounded shadow border border-secondary border-2">
-                    <a href = "event_details.html" class = "stretched-link"></a><img src="../static/img/band6.jpg" class="card-img-top" style = "height: 160px;"></a>
-                    <div class="card-body">
-                      <h5 class="card-title">Big Birthday Bash</h5>
-                      <p class="card-text">Open<br>Lutwyche<br>25/10/23<br>6:30 PM</p>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-lg-3 col-md-4 col-sm-6">
-                <div class="card rounded shadow border border-secondary border-2">
-                    <a href = "event_details.html" class = "stretched-link"></a><img src="../static/img/band7.jpg" class="card-img-top" style = "height: 160px;"></a>
-                    <div class="card-body">
-                      <h5 class="card-title">Never Ending Grooves</h5>
-                      <p class="card-text">Open<br>Brisbane<br>07/09/23<br>7:00 PM</p>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-lg-3 col-md-4 col-sm-6">
-                <div class="card rounded shadow border border-secondary border-2">
-                    <a href = "event_details.html" class = "stretched-link"></a><img src="../static/img/band8.jpg" class="card-img-top" style = "height: 160px;"></a>
-                    <div class="card-body">
-                      <h5 class="card-title">The Magic Music Maker 2</h5>
-                      <p class="card-text">Open<br>Fortitude Valley<br>13/10/23<br>9:00 PM</p>
-                    </div>
-                </div>
-	    </div> --!>
-        </div>
-    </div>
-{% endblock %}

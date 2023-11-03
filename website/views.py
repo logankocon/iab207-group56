@@ -61,7 +61,3 @@ def search():
                     ).all()
 
         return render_template('index.html', events = events)
-
-
-
-    return redirect(url_for('main.index'))

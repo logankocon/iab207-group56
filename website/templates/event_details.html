@@ -15,9 +15,11 @@
                 <div class = "row">
                     <img src = "{{event.image}}" style = "width:400px; height:250x;">
                 </div>
+                <!-- if teh user is the events creator, edit event button is displayed -->
                 {% if event.user == current_user %}
                 <br><p> <a href="{{ url_for('edit.edit', id=event.id) }}">Edit your event here</a>.</p>
                 {% endif %}
+                <!-- displays all the event info  -->
                 <br><br>
                 <h1 class = "detailsheader">Artist</h1>
                 <p class = "detailspara">{{event.artist}}</p>
@@ -40,6 +42,7 @@
             </div>
             <div class = "col-md-4">
                 <br><br><br><br><br>
+                <!-- adds booking modal button to book event -->
                 <div class = "row">
                     <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style = "width:300px;">Book Now!
                     </button>
@@ -53,6 +56,7 @@
                           <div class="modal-body">
                             <div class = "row justify-content-center">
                               <div class = "col-4">
+                                <!-- renders form that lets user select tickets and book -->
                                 {{render_form(bookform,"/events/{0}/book".format(event.id))}}
                               </div>
                             </div><br>
@@ -72,9 +76,11 @@
                 <h1 class = "detailsheader">Comments</h1>
                 <div class = "row">
                     <div class = col-8>
+                      <!-- comment form -->
                       {{render_form(form,"/events/{0}/comment".format(event.id))}}
                     </div>
                 </div>
+                <!-- renders each comment for current event -->
                 {% for comment in event.comments %}
                 <div class = "row">
                     <div class="card border-light col-10 commentbg">

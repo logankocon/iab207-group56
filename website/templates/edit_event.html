@@ -10,10 +10,12 @@
 
 {% block content %}
 
+<!-- ensures that the current user is the creator of the event -->
 {% if event.user == current_user %}
     <br><br>
     <h1 class = text-center>Edit Your Event</h1>
     <br><br>
+    <!-- form for editing event, automatically fills in forms with events current information -->
     <form action = "" method = "POST" name = "form" enctype="multipart/form-data">
         {{ form.csrf_token }}
         <div class = "container-fluid">
@@ -82,6 +84,8 @@
             </div>
         </div>
     </form>
+
+    <!-- displays this instead if user is not correct -->
     {% else %}
     <br><p class = text-center>You don't have access to this page.</p>
     {% endif %}

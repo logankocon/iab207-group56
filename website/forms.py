@@ -13,12 +13,10 @@ class LoginForm(FlaskForm):
 class RegisterForm(FlaskForm):
     user_name=StringField("User Name", validators=[InputRequired(), Length(min=3, max=30)], render_kw={'class':'form-control rounded border border-secondary'})
     email_id = StringField("Email Address", validators=[Email("Please enter a valid email"), Length(min=3, max=45)], render_kw={'class':'form-control rounded border border-secondary'})
-    #linking two fields - password should be equal to data entered in confirm
     password=PasswordField("Password", validators=[InputRequired(), Length(min=3, max=30),
                   EqualTo('confirm', message="Passwords should match")], render_kw={'class':'form-control rounded border border-secondary'})
     confirm = PasswordField("Confirm Password", validators=[InputRequired(), Length(min=3, max=30)], render_kw={'class':'form-control rounded border border-secondary'})
 
-    #submit button
     submit = SubmitField("Register")
 
 
