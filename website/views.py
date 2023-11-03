@@ -20,22 +20,22 @@ def index():
 
 @main_bp.route('/search')
 def search():
-    search = request.args['search']
-    filter_option = request.args.get('filter', default='description', type=str)
+    search = request.args['search'] #retrieve searched text
+    filter_option = request.args.get('filter', default='description', type=str) #recieved genre selection
 
-    if search == '':
+    if search == '': #if search left blank
         
-        if filter_option == 'Filter by Genre':
+        if filter_option == 'Filter by Genre': #genre left default
             events = db.session.scalars(db.select(Event)).all()
-        elif filter_option == "Other":
+        elif filter_option == "Other": #genre chosen
             query = ["Jazz", "Rock", "Pop", "Classical", "Hip Hop", "Country", "R&B", "Electronic", "Metal", "Indie"]
             events = Event.query.filter(Event.genre.not_in(query))
         else:
-            query = '%' + filter_option + '%'
+            query = '%' + filter_option + '%' 
             events = Event.query.filter(Event.genre.like(query)).all()
          
         return render_template('index.html', events = events)
-    else:
+    else: #search but genre left default
         if filter_option == 'Filter by Genre':
             query = '%' + search + '%'
             

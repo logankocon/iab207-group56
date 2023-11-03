@@ -3,7 +3,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy import Enum
 
-
+#User db class
 class User(db.Model, UserMixin):
     __tablename__ = 'users' # good practice to specify table name
     id = db.Column(db.Integer, primary_key=True)
@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     bookings = db.relationship('Booking', backref='user')
     events = db.relationship('Event', backref='user')
 
-
+#Event db class
 class Event(db.Model):
     __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
@@ -33,7 +33,7 @@ class Event(db.Model):
     comments = db.relationship('Comment', backref='event')
     bookings = db.relationship('Booking', backref='event')
 
-
+#booking db class
 class Booking(db.Model):
     __tablename__ = 'bookings'
     id = db.Column(db.Integer, primary_key = True)
