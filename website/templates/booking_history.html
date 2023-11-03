@@ -10,10 +10,12 @@
     <br><br>
     <h1 class = text-center>Booking History</h1>
     <br>
+    <!-- displays message if user has no booking -->
     {% if bookings == [] %}
     <p class = text-center>You have no bookings.</p>
     {% else %}
     <div class = "container-fluid">
+        <!-- displays each booking the currently logged in user has -->
         {% for booking in bookings %}
         <div class = "row justify-content-center p-3">
             <div class = "col-10">

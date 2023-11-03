@@ -18,6 +18,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+            <!-- Block for setting active link in navbar -->
               {% block navbar %}
 
               {% endblock %}
@@ -45,11 +46,6 @@
 <body>
     <!-- Header -->
     <header>
-
-        <!-- Navbar -->
-        <nav>
-            <!-- Your navbar should go here -->
-        </nav>
         <!-- Code for using Flask flash -->
         <div class="container-fluid">
             {% with messages = get_flashed_messages() %}

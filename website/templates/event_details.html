@@ -34,7 +34,7 @@
                 <h1 class = "detailsheader">Genre</h1>
                 <p class = "detailspara">{{event.genre}}</p>
                 <h1 class = "detailsheader">Date & Time</h1>
-                <p class = "detailspara">{{event.event_date}} {{event.time}}</p>
+                <p class = "detailspara">{{event.event_date.strftime('%d/%m/%y')}} @ {{event.time}}</p>
                 <h1 class = "detailsheader">Description</h1>
                 <p class = "detailspara">{{event.description}}</p>
             </div>
