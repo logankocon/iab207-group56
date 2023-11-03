@@ -69,10 +69,15 @@
                     {{ form.image(value = "event.image") }} {{ form.hidden_tag() }}
                 </div>
             </div>
-            <br>
             <div class = "row justify-content-center">
                 <div class = "mb-3 col-sm-3">
-                    {{ render_field(form.cancel) }} {{ form.hidden_tag() }}
+                    {% if event.status == "Cancelled" %}
+                    {{ form.uncancel.label }}
+                    {{ form.uncancel() }} {{ form.hidden_tag() }}
+                    {% else %}
+                    {{ form.cancel.label }}
+                    {{ form.cancel() }} {{ form.hidden_tag() }}
+                    {% endif %}
                 </div>
                 <div class = "mb-3 col-sm-3"></div>
             </div>

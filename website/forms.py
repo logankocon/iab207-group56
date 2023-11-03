@@ -64,6 +64,7 @@ class EditEventForm(FlaskForm):
     time = SelectField('Event Time', choices=time_choices, validators=[InputRequired('Please select an event time')], render_kw={'class': 'form-control rounded border border-secondary'})
     genre = StringField('Event Genre', validators=[InputRequired('Pleae enter an event genre.'), Length(min=3, max=50)], render_kw={'class':'form-control rounded border border-secondary'})
     cancel = BooleanField('Cancel Event?', render_kw={'class':'border border-secondary'})
+    uncancel = BooleanField('Uncancel Event?', render_kw={'class':'border border-secondary'})
     submit = SubmitField('Save Changes', render_kw={'class':'form-control rounded border border-secondary'})
 
     

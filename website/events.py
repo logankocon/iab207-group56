@@ -35,12 +35,10 @@ def create():
     event = Event(name=form.name.data,description=form.description.data, 
     image=db_file_path, event_date=form.date.data, max_tickets=form.tickets.data, tickets_left=form.tickets.data, location=form.location.data,
     artist=form.artist.data, time=form.time.data, genre=form.genre.data, user = current_user)
-    print(form.name.data)
     db.session.add(event)
     db.session.commit()
     flash('Successfully created new event', 'success')
     return redirect(url_for('event.show', id = event.id))
-  print(form.errors)
   return render_template('create_event.html', form=form)
 
 @event_bp.route('/<id>/comment', methods=['GET', 'POST'])  
@@ -63,7 +61,6 @@ def comment(id):
 def book(id):
    form = BookingForm()
    event = db.session.scalar(db.select(Event).where(Event.id==id))
-   print(current_user)
    if form.validate_on_submit(): 
       #event can only be booked if status is open
       if event.status == "Open":
@@ -94,8 +91,6 @@ def edit(id):
   event = db.session.scalar(db.select(Event).where(Event.id==id))
   #sets appropriate data in the forms
   form.description.data = event.description
-  if event.status == "Cancelled":
-     form.cancel.data = True
   if form.validate_on_submit():
     event.name = form.name.data
     event.description = form.description.data
@@ -105,7 +100,6 @@ def edit(id):
     event.event_date = form.date.data
     event.time = form.time.data
     event.tickets_left = form.tickets.data
-    print(event.name)
     #a bunch of if statements to automatically set the event's status based on edits
     if str(form.image.data) == "None":
        db.session.commit()
@@ -114,10 +108,8 @@ def edit(id):
        event.image = db_file_path
        db.session.commit()
     if form.cancel.data == True:
-       print("bunga1")
        event.status = "Cancelled"
-    else:
-       print("bunga")
+    elif form.uncancel.data == True:
        if event.status == "Cancelled":
          if datetime.date(datetime.now()) < event.event_date:
             if event.tickets_left <= 0:
@@ -147,7 +139,6 @@ def edit(id):
 #renders user's booking history
 def booking_history():
     bookings = db.session.scalars(db.select(Booking).where(Booking.user_id == current_user.id)).all()
-    print(str(bookings))
     return render_template('booking_history.html', bookings = bookings)
 
 
