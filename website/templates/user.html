@@ -7,8 +7,19 @@
               <a class="nav-link" href="{{ url_for('event.booking_history') }}">Bookings</a>
               <a class="nav-link" href="{{ url_for('event.create') }}">Create Event</a>
 {% endblock %}
+{% block loginregister %}
+{% if heading|lower =='login' %}
+
+                <a class="nav-item nav-link" href="{{ url_for('auth.register') }}">Register</a>
+                <a class="nav-item nav-link active" href="{{ url_for('auth.login') }}">Log In</a>
+{% else %}
+                <a class="nav-item nav-link active" href="{{ url_for('auth.register') }}">Register</a>
+                <a class="nav-item nav-link" href="{{ url_for('auth.login') }}">Log In</a>
+{% endif %}
+{% endblock %}
 
 {% block content %}
+
 
 <br>
 <div class="page-header">
