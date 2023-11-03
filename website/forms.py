@@ -12,12 +12,12 @@ class LoginForm(FlaskForm):
 
  # this is the registration form
 class RegisterForm(FlaskForm):
-    user_name=StringField("User Name", validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
-    email_id = StringField("Email Address", validators=[Email("Please enter a valid email")], render_kw={'class':'form-control rounded border border-secondary'})
+    user_name=StringField("User Name", validators=[InputRequired(), Length(min=3, max=30)], render_kw={'class':'form-control rounded border border-secondary'})
+    email_id = StringField("Email Address", validators=[Email("Please enter a valid email"), Length(min=3, max=45)], render_kw={'class':'form-control rounded border border-secondary'})
     #linking two fields - password should be equal to data entered in confirm
-    password=PasswordField("Password", validators=[InputRequired(),
+    password=PasswordField("Password", validators=[InputRequired(), Length(min=3, max=30),
                   EqualTo('confirm', message="Passwords should match")], render_kw={'class':'form-control rounded border border-secondary'})
-    confirm = PasswordField("Confirm Password", render_kw={'class':'form-control rounded border border-secondary'})
+    confirm = PasswordField("Confirm Password", validators=[InputRequired(), Length(min=3, max=30)], render_kw={'class':'form-control rounded border border-secondary'})
 
     #submit button
     submit = SubmitField("Register")
@@ -27,11 +27,11 @@ ALLOWED_FILE = {"PNG", "JPG", "JPEG", "png", "jpg", "jpeg"}
 
 #create new event form
 class EventForm(FlaskForm):
-    name = StringField('Event Name', validators=[InputRequired(print("testy"))], render_kw={'class':'form-control rounded border border-secondary'})
-    artist = StringField('Event Artist', validators=[InputRequired('Pleae enter an event artist.')], render_kw={'class':'form-control rounded border border-secondary'})
+    name = StringField('Event Name', validators=[InputRequired(), Length(min=3, max=50)], render_kw={'class':'form-control rounded border border-secondary'})
+    artist = StringField('Event Artist', validators=[InputRequired('Pleae enter an event artist.'), Length(min=3, max=75)], render_kw={'class':'form-control rounded border border-secondary'})
     description = TextAreaField('Description', render_kw={'class':'form-control rounded border border-secondary'},
-            validators=[InputRequired('Pleae enter a description.')])
-    location = StringField('Event Location', validators = [InputRequired('Pleae enter a location.')], render_kw={'class':'form-control rounded border border-secondary'})
+            validators=[InputRequired('Pleae enter a description.'), Length(min=3, max=500)])
+    location = StringField('Event Location', validators = [InputRequired('Pleae enter a location.'), Length(min=3, max=30)], render_kw={'class':'form-control rounded border border-secondary'})
 
     image = FileField('Event Image', validators = [
         FileRequired(message='Image cannot be empty'),

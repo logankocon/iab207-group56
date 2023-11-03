@@ -41,7 +41,7 @@ def create():
     db.session.commit()
     flash('Successfully created new travel destination', 'success')
     #Always end with redirect when form is valid
-    return redirect(url_for('event.create'))
+    return redirect(url_for('event.show', id = event.id))
   print(form.errors)
   return render_template('create_event.html', form=form)
 
