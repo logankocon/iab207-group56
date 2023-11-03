@@ -27,6 +27,9 @@ def search():
         
         if filter_option == 'Filter by Genre':
             events = db.session.scalars(db.select(Event)).all()
+        elif filter_option == "Other":
+            query = ["Jazz", "Rock", "Pop", "Classical", "Hip Hop", "Country", "R&B", "Electronic", "Metal", "Indie"]
+            events = Event.query.filter(Event.genre(query))
         else:
             query = '%' + filter_option + '%'
             events = Event.query.filter(Event.genre.like(query)).all()

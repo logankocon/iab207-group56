@@ -93,6 +93,8 @@ def edit(id):
   form = EditEventForm()
   event = db.session.scalar(db.select(Event).where(Event.id==id))
   form.description.data = event.description
+  if event.status == "Cancelled":
+     form.cancel.data = True
   if form.validate_on_submit():
     #call the function that checks and returns image
     event.name = form.name.data
@@ -104,14 +106,26 @@ def edit(id):
     event.time = form.time.data
     event.tickets_left = form.tickets.data
     print(event.name)
-    if form.cancel.data:
-       event.status = "Cancelled"
     if str(form.image.data) == "None":
        db.session.commit()
     else:
        db_file_path = check_upload_file(form)
        event.image = db_file_path
        db.session.commit()
+    if form.cancel.data == True:
+       print("bunga1")
+       event.status = "Cancelled"
+    else:
+       print("bunga")
+       if event.status == "Cancelled":
+         if datetime.date(datetime.now()) < event.event_date:
+            if event.tickets_left <= 0:
+               event.status = "Sold Out"
+            else:
+               event.status = "Open"
+         else: 
+            event.status = "Unavaliable"
+
     if event.status == "Unavaliable":
        if datetime.date(datetime.now()) < event.event_date:
          if event.tickets_left <= 0:

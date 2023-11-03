@@ -1,5 +1,5 @@
 #import flask - from the package import class
-from flask import Flask 
+from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -49,5 +49,13 @@ def create_app():
 
     from . import events
     app.register_blueprint(events.edit_bp)
+
+    @app.errorhandler(404) 
+    def not_found(e): 
+      return render_template("404.html", error=e)
+
+    @app.errorhandler(500) 
+    def not_found(e): 
+      return render_template("50x.html", error=e)
     
     return app
