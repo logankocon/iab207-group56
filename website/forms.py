@@ -6,8 +6,8 @@ from wtforms.fields import DateTimeLocalField
 
 #creates the login information
 class LoginForm(FlaskForm):
-    user_name=StringField("User Name", validators=[InputRequired('Enter user name')], render_kw={'class':'form-control rounded border border-secondary'})
-    password=PasswordField("Password", validators=[InputRequired('Enter user password')], render_kw={'class':'form-control rounded border border-secondary'})
+    user_name=StringField("User Name", validators=[InputRequired('Enter user name'), Length(min=3, max=30)], render_kw={'class':'form-control rounded border border-secondary'})
+    password=PasswordField("Password", validators=[InputRequired('Enter user password'), Length(min=3, max=30)], render_kw={'class':'form-control rounded border border-secondary'})
     submit = SubmitField("Login")
 
  # this is the registration form
@@ -31,7 +31,7 @@ class EventForm(FlaskForm):
     artist = StringField('Event Artist', validators=[InputRequired('Pleae enter an event artist.'), Length(min=3, max=75)], render_kw={'class':'form-control rounded border border-secondary'})
     description = TextAreaField('Description', render_kw={'class':'form-control rounded border border-secondary'},
             validators=[InputRequired('Pleae enter a description.'), Length(min=3, max=500)])
-    location = StringField('Event Location', validators = [InputRequired('Pleae enter a location.'), Length(min=3, max=30)], render_kw={'class':'form-control rounded border border-secondary'})
+    location = StringField('Event Location', validators = [InputRequired('Pleae enter a location.'), Length(min=3, max=50)], render_kw={'class':'form-control rounded border border-secondary'})
 
     image = FileField('Event Image', validators = [
         FileRequired(message='Image cannot be empty'),
@@ -45,7 +45,7 @@ class EventForm(FlaskForm):
             time_choices.append((time_value, time_value))
     time = SelectField('Event Time', choices=time_choices, validators=[InputRequired('Please select an event time')], render_kw={'class': 'form-control rounded border border-secondary'})
 
-    genre = StringField('Event Genre', validators=[InputRequired('Pleae enter an event genre.')], render_kw={'class':'form-control rounded border border-secondary'})
+    genre = StringField('Event Genre', validators=[InputRequired('Pleae enter an event genre.'), Length(min=3, max=50)], render_kw={'class':'form-control rounded border border-secondary'})
     #status = SelectMultipleField(u"Status", ['Sold Out','Open','Cancelled'])
     submit = SubmitField('Create', render_kw={'class':'form-control rounded border border-secondary'})
 
@@ -74,5 +74,5 @@ class BookingForm(FlaskForm):
 
 #comment form
 class CommentForm(FlaskForm):
-    text = TextAreaField('Comment', [InputRequired()])
+    text = TextAreaField('Comment', [InputRequired(), Length(min=3, max=140)], render_kw={'class':'form-control rounded border border-secondary'})
     submit = SubmitField('Post')

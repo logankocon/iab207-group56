@@ -15,6 +15,9 @@
                 <div class = "row">
                     <img src = "{{event.image}}" style = "width:400px; height:250x;">
                 </div>
+                {% if event.user == current_user %}
+                <br><p> <a href="{{ url_for('edit.edit', id=event.id) }}">Edit your event here</a>.</p>
+                {% endif %}
                 <br><br>
                 <h1 class = "detailsheader">Artist</h1>
                 <p class = "detailspara">{{event.artist}}</p>
@@ -34,9 +37,6 @@
                 <p class = "detailspara">{{event.event_date}} {{event.time}}</p>
                 <h1 class = "detailsheader">Description</h1>
                 <p class = "detailspara">{{event.description}}</p>
-                {% if event.user == current_user %}
-                <p> <a href="{{ url_for('edit.edit', id=event.id) }}">Edit your page here</a>.</p>
-                {% endif %}
             </div>
             <div class = "col-md-4">
                 <br><br><br><br><br>

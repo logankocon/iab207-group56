@@ -7,8 +7,8 @@ from sqlalchemy import Enum
 class User(db.Model, UserMixin):
     __tablename__ = 'users' # good practice to specify table name
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), index=True, unique=True, nullable=False)
-    emailid = db.Column(db.String(100), index=True, nullable=False)
+    name = db.Column(db.String(30), index=True, unique=True, nullable=False)
+    emailid = db.Column(db.String(45), index=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     comments = db.relationship('Comment', backref='user')
     bookings = db.relationship('Booking', backref='user')
@@ -18,17 +18,16 @@ class User(db.Model, UserMixin):
 class Event(db.Model):
     __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
-    description = db.Column(db.String(200))
+    name = db.Column(db.String(50))
+    artist = db.Column(db.String(75))
+    description = db.Column(db.String(500))
+    location = db.Column(db.String(50))
     image = db.Column(db.String(400))
-    location = db.Column(db.String(400))
-    time = db.Column(db.String(400))
-    artist = db.Column(db.String(400))
-    genre = db.Column(db.String(400))
-    event_date = db.Column(db.Date)
-    #db.DateTime, default=datetime.now()
     max_tickets = db.Column(db.Integer)
     tickets_left = db.Column(db.Integer)
+    time = db.Column(db.String(10))
+    genre = db.Column(db.String(50))
+    event_date = db.Column(db.Date)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     status = db.Column(Enum('Open', 'Sold Out', 'Cancelled', 'Unavaliable'), default='Open')
     comments = db.relationship('Comment', backref='event')
@@ -48,7 +47,7 @@ class Booking(db.Model):
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key = True)
-    text = db.Column(db.String(400))
+    text = db.Column(db.String(140))
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     #fk's
