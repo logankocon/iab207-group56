@@ -1,69 +1,66 @@
 {% extends 'base.html' %}
 
 {% block navbar %}
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
-              <a class="nav-link" href="{{ url_for('event.booking_history') }}">Bookings</a>
-              <a class="nav-link" href="{{ url_for('event.create') }}">Create Event</a>
+    <a class="nav-link active" aria-current="page" href="/">Home</a>
+    <a class="nav-link" href="{{ url_for('event.booking_history') }}">Bookings</a>
+    <a class="nav-link" href="{{ url_for('event.create') }}">Create Event</a>
 {% endblock %}
 
 {% block content %}
-    <div class = "container-fluid">
-        <br>
-	    <form action="{{ url_for('main.search')}}" method="get" class="form-inline">
-		<div class = "row justify-content-center">
-		    <div class = "col-8">
-			<div class="input-group rounded">
-			    <input name="search" type="search" id="searchForm" class="form-control rounded border border-secondary" placeholder="Search for events" aria-label="Search" aria-describedby="search-addon" />
-			</div>
-		    </div>
-		</div>
-		<br><br>
-		<h1 class = "text-center">Events near Brisbane, QLD</h1>
-		<div class = "row">
-		    <div style = "max-width: 200px;">
-			<select name="filter" class="form-select form-select-sm rounded border border-secondary" aria-label="Small select example">
-			    <option selected>Filter by Genre</option>
-			    <option value="Pop">Pop</option>
-			    <option value="Rock">Rock</option>
-			    <option value="Jazz">Jazz</option>
-			    <option value="Classical">Classical</option>
-			    <option value="Hip Hop">Hip Hop</option>
-			    <option value="Country">Country</option>
-			    <option value="R&B">R&B</option>
-			    <option value="Electronic">Electronic</option>
-			    <option value="Metal">Metal</option>
-			    <option value="Indie">Indie</option>
-			    <option value="Other">Other</option>
-			  </select>
-		    </div>
-		</div>
-
-		<div class="row justify-content-center">
-		    <div class="col-2">
-			    <button type="submit" class="btn btn-secondary">Search<button>
-		    </div>
-		</div>
-	    </form>
-        <br>
-
-	{% if events == [] %}
-    <p class = text-center>There are no events yet.</p>
-    {% else %}
-	<div class = "row gy-4">
-	{% for event in events %}
-
-	    <div class = "col-lg-3 col-md-4 col-sm-6">
-            <div class="card rounded shadow border border-secondary border-2">
-			    <a href = "{{ url_for('event.show', id=event.id) }}" class = "stretched-link"></a><img src="{{ event.image }}" class="card-img-top" style = "height: 160px;"></a>
-                <div class="card-body">
-			        <h5 class="card-title">{{ event.name }}</h5>
-
-                    <p class="card-text">{{event.status}}
-                    <br>
-			        {{ event.artist }}<br>{{ event.genre }}<br>{{ event.location }}<br>{{ event.event_date.strftime('%d/%m/%y') }}<br>{{ event.time }}</p>
+<div class="container-fluid">
+    <br>
+    <form action="{{ url_for('main.search')}}" method="get" class="form-inline">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="input-group rounded">
+                    <input name="search" type="search" id="searchForm" class="form-control rounded border border-secondary" placeholder="Search for events" aria-label="Search" aria-describedby="search-addon" />
                 </div>
             </div>
-        </div>	
+        </div>
+        <br><br>
+        <h1 class="text-center">Events near Brisbane, QLD</h1>
+        <div class="row">
+            <div style="max-width: 200px;">
+                <select name="filter" class="form-select form-select-sm rounded border border-secondary" aria-label="Small select example">
+                    <option selected>Filter by Genre</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Classical">Classical</option>
+                    <option value="Hip Hop">Hip Hop</option>
+                    <option value="Country">Country</option>
+                    <option value="R&B">R&B</option>
+                    <option value="Electronic">Electronic</option>
+                    <option value="Metal">Metal</option>
+                    <option value="Indie">Indie</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-2">
+                <button type="submit" class="btn btn-secondary">Search</button>
+            </div>
+        </div>
+    </form>
+    <br>
+
+    {% if events == [] %}
+        <p class="text-center">There are no events yet.</p>
+    {% else %}
+        <div class="row gy-4">
+            {% for event in events %}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card rounded shadow border border-secondary border-2">
+                        <a href="{{ url_for('event.show', id=event.id) }}" class="stretched-link"></a>
+                        <img src="{{ event.image }}" class="card-img-top" style="height: 160px;" />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.name }}</h5>
+                            <p class="card-text">{{event.status}}<br>{{ event.artist }}<br>{{ event.genre }}<br>{{ event.location }}<br>{{ event.event_date.strftime('%d/%m/%y') }}<br>{{ event.time }}</p>
+                        </div>
+                    </div>
+                </div>
 
 
 	{% endfor %}
