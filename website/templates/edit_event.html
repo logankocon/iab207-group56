@@ -70,8 +70,7 @@
             <br>
             <div class = "row justify-content-center">
                 <div class = "mb-3 col-sm-3">
-                    {{ form.status.label }}
-                    {{ form.status() }} {{ form.hidden_tag() }}
+                    {{ render_field(form.cancel) }} {{ form.hidden_tag() }}
                 </div>
                 <div class = "mb-3 col-sm-3"></div>
             </div>

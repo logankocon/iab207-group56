@@ -1,8 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, IntegerField, DateTimeField, SelectMultipleField, SelectField, DateField
+from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, IntegerField, SelectField, DateField, BooleanField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 from flask_wtf.file import FileRequired, FileField, FileAllowed
-from wtforms.fields import DateTimeLocalField
 
 #creates the login information
 class LoginForm(FlaskForm):
@@ -46,25 +45,28 @@ class EventForm(FlaskForm):
     time = SelectField('Event Time', choices=time_choices, validators=[InputRequired('Please select an event time')], render_kw={'class': 'form-control rounded border border-secondary'})
 
     genre = StringField('Event Genre', validators=[InputRequired('Pleae enter an event genre.'), Length(min=3, max=50)], render_kw={'class':'form-control rounded border border-secondary'})
-    #status = SelectMultipleField(u"Status", ['Sold Out','Open','Cancelled'])
     submit = SubmitField('Create', render_kw={'class':'form-control rounded border border-secondary'})
 
 class EditEventForm(FlaskForm):
-    name = StringField('Event Name', validators=[InputRequired(print("testy"))], render_kw={'class':'form-control rounded border border-secondary'})
-    artist = StringField('Event Artist', validators=[InputRequired('Pleae enter an event artist.')], render_kw={'class':'form-control rounded border border-secondary'})
+    name = StringField('Event Name', validators=[InputRequired(), Length(min=3, max=50)], render_kw={'class':'form-control rounded border border-secondary'})
+    artist = StringField('Event Artist', validators=[InputRequired('Pleae enter an event artist.'), Length(min=3, max=75)], render_kw={'class':'form-control rounded border border-secondary'})
     description = TextAreaField('Description', render_kw={'class':'form-control rounded border border-secondary'},
-            validators=[InputRequired('Pleae enter a description.')])
-    location = StringField('Event Location', validators = [InputRequired('Pleae enter a location.')], render_kw={'class':'form-control rounded border border-secondary'})
+            validators=[InputRequired('Pleae enter a description.'), Length(min=3, max=500)])
+    location = StringField('Event Location', validators = [InputRequired('Pleae enter a location.'), Length(min=3, max=50)], render_kw={'class':'form-control rounded border border-secondary'})
 
     image = FileField('Event Image', validators = [
         FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')], render_kw={'class':'form-control rounded border border-secondary'})
     tickets = IntegerField('Available Tickets', validators = [InputRequired('Pleae enter available tickets.')], render_kw={'class':'form-control rounded border border-secondary'})
-    date = DateField('Event Date', validators = [InputRequired('Pleae enter an event date.')], render_kw={'class':'form-control rounded border border-secondary datepicker'})
-    time = StringField('Event Time', validators = [InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
-    genre = StringField('Event Genre', validators=[InputRequired('Pleae enter an event genre.')], render_kw={'class':'form-control rounded border border-secondary'})
-    status = StringField('Event Status', render_kw={'class':'form-control rounded border border-secondary'})
-    #status = SelectMultipleField(u"Status", ['Sold Out','Open','Cancelled'])
-    submit = SubmitField('Create', render_kw={'class':'form-control rounded border border-secondary'})
+    date = DateField('Event Date', format='%Y-%m-%d', validators=[InputRequired('Please enter an event date.')], render_kw={'class': 'form-control rounded border border-secondary datepicker'})
+    time_choices = []
+    for hour in range(24):
+        for minute in ["00", "30"]:
+            time_value = f"{str(hour).zfill(2)}:{minute}"
+            time_choices.append((time_value, time_value))
+    time = SelectField('Event Time', choices=time_choices, validators=[InputRequired('Please select an event time')], render_kw={'class': 'form-control rounded border border-secondary'})
+    genre = StringField('Event Genre', validators=[InputRequired('Pleae enter an event genre.'), Length(min=3, max=50)], render_kw={'class':'form-control rounded border border-secondary'})
+    cancel = BooleanField('Cancel Event?', render_kw={'class':'border border-secondary'})
+    submit = SubmitField('Save Changes', render_kw={'class':'form-control rounded border border-secondary'})
 
     
 

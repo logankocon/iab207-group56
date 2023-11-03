@@ -104,9 +104,10 @@ def edit(id):
     event.time = form.time.data
     event.tickets_left = form.tickets.data
     print(event.name)
+    if form.cancel.data:
+       event.status = "Cancelled"
     if str(form.image.data) == "None":
        db.session.commit()
-       flash('Successfully updated event', 'success')
     else:
        db_file_path = check_upload_file(form)
        event.image = db_file_path
@@ -122,6 +123,7 @@ def edit(id):
        if event.tickets_left > 0:
             event.status = "Open"
     db.session.commit()
+    flash('Successfully updated event', 'success')
    
     #Always end with redirect when form is valid
     return redirect(url_for('edit.edit', id = id))
