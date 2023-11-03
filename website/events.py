@@ -111,15 +111,17 @@ def edit(id):
        db_file_path = check_upload_file(form)
        event.image = db_file_path
        db.session.commit()
-    if event.status == "Inactive":
+    if event.status == "Unavaliable":
        if datetime.date(datetime.now()) < event.event_date:
          if event.tickets_left <= 0:
-            event.status == "Sold Out"
+            event.status = "Sold Out"
          else:
-            event.status == "Open"
+            print("booba2")
+            event.status = "Open"
     if event.status == "Sold Out":
        if event.tickets_left > 0:
-            event.status == "Open"
+            event.status = "Open"
+    db.session.commit()
    
     #Always end with redirect when form is valid
     return redirect(url_for('edit.edit', id = id))

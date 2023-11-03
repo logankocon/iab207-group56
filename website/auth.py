@@ -61,6 +61,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flash("You have been logged out and sent to the home page.")
     return redirect(url_for('main.index'))
 
 # this is the hint for a login function

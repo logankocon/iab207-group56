@@ -58,15 +58,9 @@
                 <div class="card-body">
 			        <h5 class="card-title">{{ event.name }}</h5>
 
-                    {% if event.status == 'Open' %}
-                    <p class="card-text">Open
-                    {% elif event.status == 'Sold Out'%}
-                    <p class="card-text">Open
-                    {% elif event.status == 'Cancelled' %}
-                    <p class="card-text">Open
-                    {% else %}
-                    <p class="card-text">Open
-                    {% endif %}
+                    
+                    <p class="card-text">{{event.status}}
+                
                     <br>
 			        {{ event.artist }}<br>{{ event.genre }}<br>{{ event.location }}<br>{{ event.event_date.strftime('%d/%m/%y') }}<br>{{ event.time }}</p>
                 </div>

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
+from datetime import datetime
 from .models import Event
 from . import db
 from sqlalchemy import or_, and_
@@ -8,6 +9,13 @@ main_bp = Blueprint('main', __name__)
 @main_bp.route('/')
 def index():
     events = db.session.scalars(db.select(Event)).all()
+    for event in events:
+        if event.status == "Open" or "Sold Out":
+            print("babba")
+            if datetime.date(datetime.now()) > event.event_date:
+                event.status = "Unavaliable"
+                db.session.commit()
+
     return render_template('index.html', events = events)
 
 
