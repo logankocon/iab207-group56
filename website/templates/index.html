@@ -61,11 +61,11 @@
                     {% if event.status == 'Open' %}
                     <p class="card-text">Open
                     {% elif event.status == 'Sold Out'%}
-                    <p class="card-text">Open
+                    <p class="card-text">Sold Out
                     {% elif event.status == 'Cancelled' %}
-                    <p class="card-text">Open
+                    <p class="card-text">Cancelled
                     {% else %}
-                    <p class="card-text">Open
+                    <p class="card-text">Unavaliable
                     {% endif %}
                     <br>
 			        {{ event.artist }}<br>{{ event.genre }}<br>{{ event.location }}<br>{{ event.event_date.strftime('%d/%m/%y') }}<br>{{ event.time }}</p>
