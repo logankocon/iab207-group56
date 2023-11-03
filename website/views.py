@@ -12,7 +12,7 @@ def index():
     for event in events:
         if event.status == "Open" or "Sold Out":
             if datetime.date(datetime.now()) > event.event_date:
-                event.status = "Unavaliable"
+                event.status = "Inactive"
                 db.session.commit()
 
     return render_template('index.html', events = events)

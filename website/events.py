@@ -117,9 +117,9 @@ def edit(id):
             else:
                event.status = "Open"
          else: 
-            event.status = "Unavaliable"
+            event.status = "Inactive"
 
-    if event.status == "Unavaliable":
+    if event.status == "Inactive":
        if datetime.date(datetime.now()) < event.event_date:
          if event.tickets_left <= 0:
             event.status = "Sold Out"

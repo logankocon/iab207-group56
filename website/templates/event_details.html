@@ -17,7 +17,7 @@
                 </div>
                 <!-- if teh user is the events creator, edit event button is displayed -->
                 {% if event.user == current_user %}
-                <br><p> <a href="{{ url_for('edit.edit', id=event.id) }}">Edit your event here</a>.</p>
+                <br><h1 class = "detailsheader"> <a href="{{ url_for('edit.edit', id=event.id) }}">Edit your event here.</a></h1>
                 {% endif %}
                 <!-- displays all the event info  -->
                 <br><br>

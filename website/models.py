@@ -29,7 +29,7 @@ class Event(db.Model):
     genre = db.Column(db.String(50))
     event_date = db.Column(db.Date)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    status = db.Column(Enum('Open', 'Sold Out', 'Cancelled', 'Unavaliable'), default='Open')
+    status = db.Column(Enum('Open', 'Sold Out', 'Cancelled', 'Inactive'), default='Open')
     comments = db.relationship('Comment', backref='event')
     bookings = db.relationship('Booking', backref='event')
 

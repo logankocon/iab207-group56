@@ -75,5 +75,5 @@ class BookingForm(FlaskForm):
 
 #comment form
 class CommentForm(FlaskForm):
-    text = TextAreaField('Comment', [InputRequired(), Length(min=3, max=140)], render_kw={'class':'form-control rounded border border-secondary'})
+    text = TextAreaField('Comment', [InputRequired(), Length(max=140)], render_kw={'class':'form-control rounded border border-secondary'})
     submit = SubmitField('Post')
