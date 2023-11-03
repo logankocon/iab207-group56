@@ -117,7 +117,6 @@ def edit(id):
          if event.tickets_left <= 0:
             event.status = "Sold Out"
          else:
-            print("booba2")
             event.status = "Open"
     if event.status == "Sold Out":
        if event.tickets_left > 0:
@@ -133,7 +132,6 @@ def edit(id):
 @login_required
 def booking_history():
     bookings = db.session.scalars(db.select(Booking).where(Booking.user_id == current_user.id)).all()
-    print("HERE")
     print(str(bookings))
     return render_template('booking_history.html', bookings = bookings)
 
