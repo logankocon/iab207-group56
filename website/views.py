@@ -11,7 +11,6 @@ def index():
     events = db.session.scalars(db.select(Event)).all()
     for event in events:
         if event.status == "Open" or "Sold Out":
-            print("babba")
             if datetime.date(datetime.now()) > event.event_date:
                 event.status = "Unavaliable"
                 db.session.commit()

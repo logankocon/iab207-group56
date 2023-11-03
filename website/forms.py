@@ -50,7 +50,7 @@ class EventForm(FlaskForm):
     submit = SubmitField('Create', render_kw={'class':'form-control rounded border border-secondary'})
 
 class EditEventForm(FlaskForm):
-    name = StringField('Event Name', validators=[InputRequired(print("testy"))], render_kw={'class':'form-control rounded border border-secondary'})
+    name = StringField('Event Name', validators=[InputRequired()], render_kw={'class':'form-control rounded border border-secondary'})
     artist = StringField('Event Artist', validators=[InputRequired('Pleae enter an event artist.')], render_kw={'class':'form-control rounded border border-secondary'})
     description = TextAreaField('Description', render_kw={'class':'form-control rounded border border-secondary'},
             validators=[InputRequired('Pleae enter a description.')])
